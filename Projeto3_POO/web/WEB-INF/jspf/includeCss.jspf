@@ -1,0 +1,16 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<!-- Animate CSS -->
+<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" type="text/css" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+<!-- Style CSS -->
+<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+
+<!-- WoW Js-->
+<script type="text/javascript" src="assets/js/wow.js"></script>
+<script>
+  new WOW().init();
+</script>
