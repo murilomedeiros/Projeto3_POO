@@ -9,7 +9,7 @@ package br.com.fatecpg.poo;
  *
  * @author Renan
  */
-public class Fornecedores {
+public class Fornecedor {
     private String nome;
     private String razaoSocial;
     private String cnpj;

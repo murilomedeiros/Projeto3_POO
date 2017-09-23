@@ -9,9 +9,9 @@ import java.util.Map;
  * @author Renan
  */
 
-public class BancoFornecedores {
-    private static ArrayList<Fornecedores> fornecedores;
-    public static ArrayList<Fornecedores> getFornecedores(){
+public class BancoFornecedor {
+    private static ArrayList<Fornecedor> fornecedores;
+    public static ArrayList<Fornecedor> getFornecedor(){
         if(fornecedores == null){
             fornecedores = new ArrayList<>();
         }
