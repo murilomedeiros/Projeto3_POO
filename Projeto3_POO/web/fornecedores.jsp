@@ -21,13 +21,20 @@
     <!-- Page Content -->
     <h1>Fornecedor</h1>
         <%try{
+           String nome = "";
+           String razaoSocial = "";
+           String cnpj = "";
+           String email = "";
+           String telefone = "";
+           String endereco = "";
+            //Fornecedor a = " ";
             if(request.getParameter("add")!=null){
-                String nome = request.getParameter("nome");
-                String razaoSocial = request.getParameter("razaoSocial");
-                String cnpj = request.getParameter("cnpj");
-                String email = request.getParameter("email");
-                String telefone = request.getParameter("telefone");
-                String endereco = request.getParameter("endereco");
+                nome = request.getParameter("nome");
+                razaoSocial = request.getParameter("razaoSocial");
+                cnpj = request.getParameter("cnpj");
+                email = request.getParameter("email");
+                telefone = request.getParameter("telefone");
+                endereco = request.getParameter("endereco");
                 Fornecedor c = new Fornecedor();
                 c.setNome(nome);
                 c.setRazaoSocial(razaoSocial);
@@ -39,11 +46,18 @@
             } else if(request.getParameter("remove")!=null){
                 int i = Integer.parseInt(request.getParameter("i"));
                 BancoFornecedor.getFornecedor().remove(i);
-            }
+            }else if(request.getParameter("altera")!=null){
+                int i = Integer.parseInt(request.getParameter("i"));
+                nome = BancoFornecedor.getFornecedor().get(i).getNome();
+                razaoSocial = BancoFornecedor.getFornecedor().get(i).getRazaoSocial();
+                cnpj = BancoFornecedor.getFornecedor().get(i).getCnpj();
+                email = BancoFornecedor.getFornecedor().get(i).getEmail();
+                telefone = BancoFornecedor.getFornecedor().get(i).getTelefone();
+                endereco = BancoFornecedor.getFornecedor().get(i).getEndereco();
+                BancoFornecedor.getFornecedor().remove(i);
+            }%>
         
-        }catch(Exception ex){%>
-                <h2>Deu Ruim</h2>
-        <%}%>
+        
         
             
         <form border="1">
@@ -51,26 +65,27 @@
             <legend>Novo contato</legend>
             
                 Nome:<br/>
-                <input type="text" name="nome" placeholder="Nome" required/><br/>
+                <input type="text" name="nome" value="<%=nome%>" placeholder="Nome" required/><br/>
                 Razão social:<br/>
-                <input type="text" name="razaoSocial" placeholder="Razão Social" required/><br/>
+                <input type="text" name="razaoSocial" value="<%=razaoSocial%>" placeholder="Razão Social" required/><br/>
                 CNPJ:<br/>
-                <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required/><br/>
+                <input type="text" id="cnpj" name="cnpj" value="<%=cnpj%>" placeholder="00.000.000/0000-00" required/><br/>
                 Email:<br/>
-                <input type="text" name="email" placeholder="Email" required/><br/>
+                <input type="text" name="email" value="<%=email%>" placeholder="Email" required/><br/>
                 Telefone:<br/>
-                <input type="text" name="telefone" placeholder="Telefone" required/><br/>
+                <input type="text" name="telefone" value="<%=telefone%>" placeholder="Telefone" required/><br/>
                 Endereço:<br/>
-                <input type="text" name="endereco" placeholder="Endereço" required/><br/>
+                Rua:<input type="text" name="endereco"  value="<%=endereco%>" placeholder="Endereço" required/><br/>
                 <br/>
                 <input type="submit" name="add" value="Adicionar"/>
             
         </fieldset>
             </form>
             
-            
+            <br/>
+            <br/>
         <h2>Lista</h2>
-        <table >
+        <table border="2" >
             <tr>
                 <th>Indice</th>
                 <th>Nome</th>
@@ -80,6 +95,7 @@
                 <th>Telefone</th>
                 <th>Endereço</th>
                 <th>Exclusão</th>
+                <th>Alteração</th>
             </tr>
             <%for (int i=0; i<BancoFornecedor.getFornecedor().size();i++){
                 Fornecedor c = BancoFornecedor.getFornecedor().get(i);%>
@@ -97,12 +113,20 @@
                             <input type="submit" name="remove" value="Excluir"/>
                         </form>
                     </td>
+                    <td>
+                        <form>
+                            <input type="hidden" name="i" value="<%=i%>"/>
+                            <input type="submit" name="altera" value="Alterar"/>
+                        </form>
+                    </td>
                 </tr>
             <%}%>
             
         </table>
             
-
+<%}catch(Exception ex){%>
+                <h3>Deu Ruim</h3>
+        <%}%>
     <!-- Page Content End -->
 
 

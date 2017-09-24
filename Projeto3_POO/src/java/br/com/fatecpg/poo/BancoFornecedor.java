@@ -10,12 +10,12 @@ import java.util.Map;
  */
 
 public class BancoFornecedor {
-    private static ArrayList<Fornecedor> fornecedores;
+    private static ArrayList<Fornecedor> fornecedor;
     public static ArrayList<Fornecedor> getFornecedor(){
-        if(fornecedores == null){
-            fornecedores = new ArrayList<>();
+        if(fornecedor == null){
+            fornecedor = new ArrayList<>();
         }
-        return fornecedores;
+        return fornecedor;
     }
 }
 
