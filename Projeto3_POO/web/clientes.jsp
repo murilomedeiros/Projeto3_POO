@@ -20,7 +20,19 @@
 
         <!-- Page Content -->
         <h1>Clientes</h1>
-        <%
+        <%      
+                String auxStreet = "" ; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
+                String auxCep = "" ;
+                String auxCity = "" ;
+                String auxDistrict = "" ;
+                String auxState = "" ;
+                String auxNumber = "" ;
+                String auxComplement = "" ;
+                String auxName = "" ;
+                String auxRG = "" ;
+                String auxCPF = "" ;
+                String auxEmail = "";
+                String auxPhone = "";
             try {
                 String msg1 = ""; //DECLARANDO AS VARIÁVEIS
                 String msg2 = "";
@@ -28,6 +40,7 @@
                 String name = request.getParameter("name"); //PEGANDO OS PARAMÊTROS
                 String cpf = request.getParameter("cpf");
                 String city = request.getParameter("city");
+                String state = request.getParameter("state");
                 String district = request.getParameter("district");
                 String rg = request.getParameter("rg");
                 String email = request.getParameter("email");
@@ -36,7 +49,7 @@
                 String number = request.getParameter("number");
                 String complement = request.getParameter("complement");
                 String cep = request.getParameter("cep");
-                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null &&  district != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" &&  district != "")) { //CHECKANDO OS PARAMÊTROS
+                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null &&  district != null &&  state != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" &&  district != "" &&  state != "")) { //CHECKANDO OS PARAMÊTROS
                     if (request.getParameter("include") != null) { //CHECKANDO A AÇÃO INCLUDE
                         for (int x = 0; x < BancoClientes.getClientes().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
                             Cliente c = BancoClientes.getClientes().get(x);
@@ -44,6 +57,7 @@
                             String cityTest = c.getCity();
                             String districtTest = c.getDistrict();
                             String emailTest = c.getEmail();
+                            String stateTest = c.getState();
                             String phoneTest = c.getPhone();
                             String streetTest = c.getStreet();
                             String numberTest = c.getNumber();
@@ -56,7 +70,7 @@
                             if (rgTest.equals(rg)) { //RG IGUAL
                                 msg2 = "RG já cadastrado no banco !!";
                             }
-                            if (rgTest.equals(rg) && cpfTest.equals(cpf) && nameTest.equals(name) && emailTest.equals(email) && phoneTest.equals(phone) && streetTest.equals(street) && numberTest.equals(number) && complementTest.equals(complement) && cityTest.equals(city) && districtTest.equals(district)) { //CLIENTE IGUAL
+                            if (rgTest.equals(rg) && cpfTest.equals(cpf) && nameTest.equals(name) && emailTest.equals(email) && phoneTest.equals(phone) && streetTest.equals(street) && numberTest.equals(number) && complementTest.equals(complement) && cityTest.equals(city) && districtTest.equals(district) && stateTest.equals(state)) { //CLIENTE IGUAL
                                 msg3 = "Cliente já cadastrado no banco !!";
                             }
                         }
@@ -71,6 +85,7 @@
                             c.setNumber(number);
                             c.setComplement(complement);
                             c.setCep(cep);
+                            c.setState(state);
                             c.setCity(city);
                             c.setDistrict(district);
                             BancoClientes.getClientes().add(c);
@@ -92,7 +107,36 @@
                                     %>
                                     <div><label>Cliente removido com sucesso !</label></div>
                                     <%
-                                }
+                                } else if(request.getParameter("search")!=null){
+        
+                                    try {
+                                       br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
+                                   br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
+
+                               // TODO process result here
+                                   br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cep);
+
+                                       if(result.getEnd()!=null){
+                                       auxName = name;
+                                       auxCPF = cpf;
+                                       auxRG = rg;
+                                       auxEmail = email;
+                                       auxPhone = phone;
+                                       auxCep = cep;
+                                       auxStreet = result.getEnd();
+                                       auxDistrict = result.getBairro();
+                                       auxCity = result.getCidade();
+                                       auxState = result.getUf();
+                                       auxNumber = result.getComplemento();
+                                       auxComplement = result.getComplemento2();
+
+                                   } else {%>
+
+                                   <%}
+
+                           }   catch (Exception ex) {
+                               // TODO handle custom exceptions here
+                           }}
                 } else {
                     %>
                         <div>Preencha o formulário corretamente, por favor.</div>
@@ -109,27 +153,30 @@
                         %>
         <form>
             <label>Nome:</label><br/>
-            <input type="text" name="name" required/><br/><br/>
+            <input type="text" name="name" value="<%=auxName%>"/><br/><br/>
             <label>CPF:</label><br/>
-            <input type="number" name="cpf" required/><br/><br/>
+            <input type="number" name="cpf"  value="<%=auxCPF%>"/><br/><br/>
             <label>RG:</label><br/>
-            <input type="text" name="rg" required/><br/><br/>
+            <input type="text" name="rg" value="<%=auxRG%>"/><br/><br/>
             <label>Email:</label><br/>
-            <input type="text" name="email" required/><br/><br/>
+            <input type="text" name="email" value="<%=auxEmail%>"/><br/><br/>
             <label>Telefone:</label><br/>
-            <input type="text" name="phone" required/><br/><br/>
+            <input type="text" name="phone" value="<%=auxPhone%>" /><br/><br/>
             <label>CEP:</label><br/>
-            <input type="text" name="cep" required/><br/><br/>
+            <input type="text" name="cep" value="<%=auxCep%>"/><br/>
+            <input type="submit" id="search" name="search" value="search"/><br/><br/>
+            <label>Estado:</label><br/>
+            <input type="text" name="state" value="<%=auxState%>" /><br/><br/>
             <label>Cidade:</label><br/>
-            <input type="text" name="city" required/><br/><br/>
+            <input type="text" name="city" value="<%=auxCity%>" /><br/><br/>
             <label>Bairro:</label><br/>
-            <input type="text" name="district" required/><br/><br/>
+            <input type="text" name="district" value="<%=auxDistrict%>"/><br/><br/>
             <label>Rua:</label><br/>
-            <input type="text" name="street" required/><br/><br/>
+            <input type="text" name="street" value="<%=auxStreet%>" /><br/><br/>
             <label>Número:</label><br/>
-            <input type="text" name="number" required/><br/><br/>
+            <input type="text" name="number" value="<%=auxNumber%>" /><br/><br/>
             <label>Complemento:</label><br/>
-            <input type="text" name="complement"/><br/><br/>
+            <input type="text" name="complement" value="<%=auxComplement%>"/><br/><br/>
             
             <input type="submit" name="include" value="Adicionar"/>
         </form><br/>
@@ -143,6 +190,7 @@
                 <th>Email</th>
                 <th>Telefone</th>
                 <th>CEP</th>
+                <th>Estado</th>
                 <th>Cidade</th>
                 <th>Bairro</th>
                 <th>Rua</th>
@@ -155,13 +203,14 @@
                     Cliente c = BancoClientes.getClientes().get(i);
             %>
             <tr>
-                <td><%=i%></td>
+                <td><%=i+1%></td>
                 <td><%=c.getName()%></td>
                 <td><%=c.getCpf()%></td>
                 <td><%=c.getRg()%></td>
                 <td><%=c.getEmail()%></td>
                 <td><%=c.getPhone()%></td>
                 <td><%=c.getCep()%></td>
+                <td><%=c.getState()%></td>
                 <td><%=c.getCity()%></td>
                 <td><%=c.getDistrict()%></td>
                 <td><%=c.getStreet()%></td>

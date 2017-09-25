@@ -20,6 +20,7 @@ public class Cliente {
     private String complement;
     private String cep;
     private String city;
+    private String state;
     private String district;
 
     public String getName() {
@@ -102,6 +103,14 @@ public class Cliente {
         this.city = city;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getDistrict() {
         return district;
     }
@@ -109,5 +118,7 @@ public class Cliente {
     public void setDistrict(String district) {
         this.district = district;
     }
+
+   
    
 }
