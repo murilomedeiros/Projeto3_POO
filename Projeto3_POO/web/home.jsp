@@ -10,15 +10,16 @@
     <!-- Include Css End -->
 
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#menu">
     <!-- Include Menu -->
     <%@include file="WEB-INF/jspf/includeMenu.jspf" %>
     <!-- Include Menu End -->
 
 
     <!-- Page Content -->
-
-    <-- Page Content End -->
+    <div class="container-fluid page">
+    </div>
+    <!-- Page Content End -->
 
 
     <!-- Include Footer -->
