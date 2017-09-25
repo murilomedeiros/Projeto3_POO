@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <!-- Navbar -->
-<nav id="menu" class="navbar navbar-expand-lg fixed-top transparent">
+<nav id="menu" class="navbar navbar-expand-lg transparent">
   <a class="navbar-brand img-brand" href="home.jsp"><img class="img-fluid" src="assets/img/007-logo.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

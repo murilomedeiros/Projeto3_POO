@@ -1,5 +1,6 @@
 <%@page import="br.com.fatecpg.poo.BancoClientes"%>
 <%@page import="br.com.fatecpg.poo.Cliente"%>
+<%@page import="br.com.fatecpg.poo.BancoFornecedor"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,11 @@
 
   </head>
   <body>
+
+    <!-- Include Top Menu -->
+    <%@include file="WEB-INF/jspf/includeClienteCounter.jspf" %>
+    <!-- Include Top Menu End -->
+
     <!-- Include Menu -->
     <%@include file="WEB-INF/jspf/includeMenu.jspf" %>
     <!-- Include Menu End -->
@@ -26,8 +32,7 @@
         <div class="divider"></div>
       </div>
 
-      <%
-         String auxStreet = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
+      <%         String auxStreet = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
          String auxCep = "";
          String auxCity = "";
          String auxDistrict = "";
@@ -95,7 +100,13 @@
                      c.setCity(city);
                      c.setDistrict(district);
                      BancoClientes.getClientes().add(c);
-      %> <label>Cadastro efetuado com sucesso !!</label>
+      %>
+      <center>
+        <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          Cadastro efetuado com sucesso !!
+        </div>
+      </center>
+
       <div class="row justify-content-center">
         <div class="col-md-2">
           <center>
@@ -108,23 +119,52 @@
       <%
          }
          if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CPF JÁ CADASTRADO"... %>
-      <div><label><%= msg1%></label></div>
+      <center>
+        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          <%= msg1%>
+        </div>
+      </center>
+
       <%} else if (msg1 == "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG JÁ CADASTRADO"...%>
-      <div><label><%= msg2%></label></div>
+      <center>
+        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          <%= msg2%>
+        </div>
+      </center>
+
       <%} else if (msg1 != "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG E CPF JÁ CADASTRADO"...%>
-      <div><label>RG e CPF já existente no banco !!</label></div>
+
+      <center>
+        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          RG e CPF já existente no banco !!
+        </div>
+      </center>
+
       <%} else if (msg3 != "") { //ERRO !!!, CLIENTE JÁ CADASTRADO"...%>
-      <div><label><%= msg3%></label></div>
+      <center>
+        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          <%= msg3%>
+        </div>
+      </center>
       <%}
       } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
          try {
             int i = Integer.parseInt(request.getParameter("i"));
             BancoClientes.getClientes().remove(i);
       %>
-      <div><label>Cliente removido com sucesso !</label></div>
+      <center>
+        <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          Cliente removido com sucesso !!
+        </div>
+      </center>
+
       <%} catch (Exception ex) {
       %>
-      <div><label>ERRO NA EXCLUSÃO DO CLIENTE OU CLIENTE JÁ FOI EXCLUÍDO DO BANCO!!</label></div>
+      <center>
+        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+          Erro na exclusão do cliente ou cliente já excluído !!
+        </div>
+      </center>
       <%
          }
 
@@ -173,21 +213,21 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <form class="">
-            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>"/>
-            <input class="form-input" placeholder="CPF" type="number" name="cpf"  value="<%=auxCPF%>"/>
-            <input class="form-input" placeholder="RG" type="text" name="rg" value="<%=auxRG%>"/>
-            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>"/>
-            <input class="form-input" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" />
-            <input class="form-input" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>"/>
+            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="top" title="Digite seu Nome"/>
+            <input class="form-input" placeholder="CPF" type="number" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="top" title="Digite seu CPF"/>
+            <input class="form-input" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="top" title="Digite seu RG"/>
+            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="top" title="Digite seu Email"/>
+            <input class="form-input" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="top" title="Digite seu Telefone"/>
+            <input class="form-input" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="top" title="Digite seu CEP"/>
 
             <center><input type="submit" id="search" name="search" value="search"/></center><br/><br/>
 
-            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" />
-            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" />
-            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>"/>
-            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" />
-            <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" />
-            <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>"/>
+            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="top" title="Digite seu Estado"/>
+            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" data-toggle="tooltip" data-placement="top" title="Digite sua Cidade"/>
+            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="top" title="Digite seu Bairro"/>
+            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="top" title="Digite sua Rua"/>
+            <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="top" title="Digite o Número"/>
+            <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="top" title="Digite o Complemento"/>
 
             <center><input type="submit" name="include" value="Adicionar"/></center>
           </form>
@@ -249,7 +289,6 @@
           %>
         </table>
       </div>
-
     </div>
     <!-- Page Content End -->
 

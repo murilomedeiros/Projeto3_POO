@@ -1,0 +1,19 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+   int cz = BancoClientes.getClientes().size();
+   int fz = BancoFornecedor.getFornecedor().size();
+%>
+
+<div class="top-menu">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <span class="text">Clientes Cadastrados: <i class="icon fa fa-user"></i><span class="badge badge-dark wow bounceIn"> <%= cz%></span></span>
+      </div>
+      <div class="col-md-3">
+        <span>Fornecedores Cadastrados: <i class="fa fa-user"></i><span class="badge badge-dark wow bounceIn"> <%= fz%></span></span>
+      </div>
+    </div>
+  </div>
+</div>

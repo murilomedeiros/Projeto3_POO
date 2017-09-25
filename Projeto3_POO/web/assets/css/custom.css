@@ -34,6 +34,19 @@ p{
   padding: 60px;
 }
 
+/* TopMenu */
+.top-menu{
+  background: #d3d3d3;
+  padding: 15px 0px;
+}
+.badge{
+  margin-left: 2px;
+}
+.badge-dark{
+  background: #262626;
+  color: #d3d3d3;
+}
+
 /* Nav */
 nav li{
   padding: 0px 10px;
