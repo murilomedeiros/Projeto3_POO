@@ -300,5 +300,10 @@
     <!-- Include Javascript Links -->
     <%@include file="WEB-INF/jspf/includeJs.jspf" %>
     <!-- Include Javascript Links End -->
+
+    <!-- Include Tooltip -->
+    <%@include file="WEB-INF/jspf/includeTooltip.jspf" %>
+    <!-- Include Tooltip End -->
+
   </body>
 </html>
