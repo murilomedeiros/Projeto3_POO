@@ -214,11 +214,11 @@
         <div class="col-md-6">
           <form class="">
             <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="top" title="Digite seu Nome"/>
-            <input class="form-input" placeholder="CPF" type="number" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="top" title="Digite seu CPF"/>
-            <input class="form-input" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="top" title="Digite seu RG"/>
+            <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="top" title="Digite seu CPF"/>
+            <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="top" title="Digite seu RG"/>
             <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="top" title="Digite seu Email"/>
-            <input class="form-input" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="top" title="Digite seu Telefone"/>
-            <input class="form-input" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="top" title="Digite seu CEP"/>
+            <input class="form-input telefone" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="top" title="Digite seu Telefone"/>
+            <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="top" title="Digite seu CEP"/>
 
             <center><input type="submit" id="search" name="search" value="search"/></center><br/><br/>
 
