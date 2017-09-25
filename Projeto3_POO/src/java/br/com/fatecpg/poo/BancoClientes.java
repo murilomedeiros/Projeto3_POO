@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author muril
  */
 public class BancoClientes {
-    private static ArrayList<Clientes> clientes;
-    public static ArrayList<Clientes> getClientes() {
+    private static ArrayList<Cliente> clientes;
+    public static ArrayList<Cliente> getClientes() {
         if (clientes == null) {
             clientes = new ArrayList<>();
         }

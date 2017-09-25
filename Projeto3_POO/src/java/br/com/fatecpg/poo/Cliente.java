@@ -9,13 +9,16 @@ package br.com.fatecpg.poo;
  *
  * @author muril
  */
-public class Clientes {
+public class Cliente {
     private String name;
     private String cpf;
     private String rg;
     private String email;
-    private String telefone;
-    private String endereço;
+    private String phone;
+    private String street;
+    private String number;
+    private String complement;
+    private String cep;
 
     public String getName() {
         return name;
@@ -49,21 +52,45 @@ public class Clientes {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public String getStreet() {
+        return street;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setStreet(String street) {
+        this.street = street;
     }
-    
-    
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+   
 }
