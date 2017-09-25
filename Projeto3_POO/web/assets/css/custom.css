@@ -12,10 +12,6 @@ p{
   outline-style: none;
   outline: none;
 }
-.scroll{
-  color: #1a1a1a;
-
-}
 .title-box{
   padding: 30px 0px;
 }
@@ -75,16 +71,38 @@ nav li a:hover{
 }
 
 /* Botões */
+.scroll{
+  margin-bottom: 20px;
+}
+.scroll a{
+  font-size: 26px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  width: 48px;
+  border: 2px solid #1a1a1a;
+  color: #1a1a1a;
+  border-radius: 50%;
+  padding: 5px 10px;
+  transition: all .3s ease-in-out;
+}
+.scroll a:hover{
+  color: #404040;
+  border: 2px solid #404040;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all .3s ease-in-out;
+}
+
 .btn{
   background: #1a1a1a;
-  border: 1px solid #1a1a1a;
+  border: 2px solid #1a1a1a;
   font-size: 18px;
-  color: #d2d2d2;
+  color: #f2f2f2;
   transition: all .3s ease-in;
 }
 .btn:hover{
   background: transparent;
-  border: 1px solid #1a1a1a;
+  border: 2px solid #1a1a1a;
   color: #1a1a1a;
   transition: all .3s ease-out;
   cursor: pointer;

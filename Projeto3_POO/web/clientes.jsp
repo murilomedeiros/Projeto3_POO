@@ -99,7 +99,9 @@
       <div class="row justify-content-center">
         <div class="col-md-2">
           <center>
-            <a href="#table" class="scroll"><i class="fa fa-arrow-down fa-2x"></i></a>
+            <div class="scroll">
+              <a href="#table"><i class="fa fa-arrow-down"></i></a>
+            </div>
           </center>
         </div>
       </div>
