@@ -101,11 +101,17 @@
                             <div><label><%= msg3 %></label></div>
                       <%}
                     } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
+                        try{
                         int i = Integer.parseInt(request.getParameter("i"));
                         BancoClientes.getClientes().remove(i);
                         %>
                             <div><label>Cliente removido com sucesso !</label></div>
-                        <%
+                        <%} catch(Exception ex) {
+                            %>
+                            <div><label>ERRO NA EXCLUSÃO DO CLIENTE OU CLIENTE JÁ FOI EXCLUÍDO DO BANCO!!</label></div>
+                            <%
+                        }
+                        
                     } else if (request.getParameter("search") != null) { //BUSCANDO CEP
                         try {
                             br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
