@@ -123,8 +123,6 @@
                                 auxDistrict = result.getBairro();
                                 auxCity = result.getCidade();
                                 auxState = result.getUf();
-                                auxNumber = result.getComplemento();
-                                auxComplement = result.getComplemento2();
 
                             } else {%>
                                 <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
