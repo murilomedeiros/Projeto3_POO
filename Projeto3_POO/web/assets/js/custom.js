@@ -20,7 +20,7 @@ $(window).scroll(function() {
   }
 });
 
-
+/* Jquery Mask */
 $(document).ready(function() {
   $('.data').mask('00/00/0000');
   $('.cep').mask('00000-000');

@@ -229,7 +229,7 @@
             <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="top" title="Digite o Número"/>
             <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="top" title="Digite o Complemento"/>
 
-            <center><input type="submit" name="include" value="Adicionar"/></center>
+            <center><input class="btn" type="submit" name="include" value="Adicionar"/></center>
           </form>
         </div>
       </div>
@@ -280,7 +280,7 @@
             <td>
               <form>
                 <input type="hidden" name="i" value="<%=i%>"/>
-                <input type="submit" name="remove" value="Excluir"/>
+                <input class="btn" type="submit" name="remove" value="Excluir"/>
               </form>
             </td>
           </tr>
