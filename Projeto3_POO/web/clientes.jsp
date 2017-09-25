@@ -20,24 +20,24 @@
 
         <!-- Page Content -->
         <h1>Clientes</h1>
-        <%      
-                String auxStreet = "" ; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
-                String auxCep = "" ;
-                String auxCity = "" ;
-                String auxDistrict = "" ;
-                String auxState = "" ;
-                String auxNumber = "" ;
-                String auxComplement = "" ;
-                String auxName = "" ;
-                String auxRG = "" ;
-                String auxCPF = "" ;
-                String auxEmail = "";
-                String auxPhone = "";
+        <%
+            String auxStreet = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP  
+            String auxCep = "";
+            String auxCity = "";
+            String auxDistrict = "";
+            String auxState = "";
+            String auxNumber = "";
+            String auxComplement = "";
+            String auxName = "";
+            String auxRG = "";
+            String auxCPF = "";
+            String auxEmail = "";
+            String auxPhone = "";
             try {
                 String msg1 = ""; //DECLARANDO AS VARIÁVEIS
                 String msg2 = "";
                 String msg3 = "";
-                String name = request.getParameter("name"); //PEGANDO OS PARAMÊTROS
+                String name = request.getParameter("name"); //PEGANDO OS PARÂMETROS
                 String cpf = request.getParameter("cpf");
                 String city = request.getParameter("city");
                 String state = request.getParameter("state");
@@ -49,8 +49,8 @@
                 String number = request.getParameter("number");
                 String complement = request.getParameter("complement");
                 String cep = request.getParameter("cep");
-                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null &&  district != null &&  state != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" &&  district != "" &&  state != "")) { //CHECKANDO OS PARAMÊTROS
-                    if (request.getParameter("include") != null) { //CHECKANDO A AÇÃO INCLUDE
+                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null && district != null && state != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" && district != "" && state != "")) { //CHECKANDO OS PARÂMETROS
+                    if ((request.getParameter("include") != null) && (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" && district != "" && state != "")) { //CHECKANDO A AÇÃO INCLUDE
                         for (int x = 0; x < BancoClientes.getClientes().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
                             Cliente c = BancoClientes.getClientes().get(x);
                             String nameTest = c.getName();
@@ -74,7 +74,7 @@
                                 msg3 = "Cliente já cadastrado no banco !!";
                             }
                         }
-                        if (msg1 == "" && msg2 == "" && msg3 == "") { //TUDO CERTO, ADICIONANDO NO "BANCO"...
+                        if ((msg1 == "" && msg2 == "" && msg3 == "") ) { //TUDO CERTO, ADICIONANDO NO "BANCO"...
                             Cliente c = new Cliente();
                             c.setName(name);
                             c.setCpf(cpf);
@@ -92,65 +92,63 @@
                             %> <label>Cadastro efetuado com sucesso !!</label><%
                         }
                         if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CPF JÁ CADASTRADO"... %> 
-                        <div><label><%=msg1%></label></div>
-                        <%} else if (msg1 == "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG JÁ CADASTRADO"...%>
-                        <div><label><%=msg2%></label></div>
-                        <%} else if (msg1 != "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG E CPF JÁ CADASTRADO"...%>
-                        <div><label>RG e CPF já existente no banco !!</label></div>
-                        <%} else if (msg3 != "") { //ERRO !!!, CLIENTE JÁ CADASTRADO"...%>
-                        <div><label><%=msg3%></label></div>
-                        <%}
-                    }
-                                 else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
-                                    int i = Integer.parseInt(request.getParameter("i"));
-                                    BancoClientes.getClientes().remove(i);
-                                    %>
-                                    <div><label>Cliente removido com sucesso !</label></div>
-                                    <%
-                                } else if(request.getParameter("search")!=null){
-        
-                                    try {
-                                       br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
-                                   br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
+                            <div><label><%= msg1 %></label></div>
+                      <%} else if (msg1 == "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG JÁ CADASTRADO"...%>
+                            <div><label><%= msg2 %></label></div>
+                      <%} else if (msg1 != "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG E CPF JÁ CADASTRADO"...%>
+                            <div><label>RG e CPF já existente no banco !!</label></div>
+                      <%} else if (msg3 != "") { //ERRO !!!, CLIENTE JÁ CADASTRADO"...%>
+                            <div><label><%= msg3 %></label></div>
+                      <%}
+                    } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
+                        int i = Integer.parseInt(request.getParameter("i"));
+                        BancoClientes.getClientes().remove(i);
+                        %>
+                            <div><label>Cliente removido com sucesso !</label></div>
+                        <%
+                    } else if (request.getParameter("search") != null) { //BUSCANDO CEP
+                        try {
+                            br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
+                            br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
+                            br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cep);
 
-                               // TODO process result here
-                                   br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cep);
+                            if (result.getEnd() != null) {
+                                auxName = name;
+                                auxCPF = cpf;
+                                auxRG = rg;
+                                auxEmail = email;
+                                auxPhone = phone;
+                                auxCep = cep;
+                                auxStreet = result.getEnd();
+                                auxDistrict = result.getBairro();
+                                auxCity = result.getCidade();
+                                auxState = result.getUf();
+                                auxNumber = result.getComplemento();
+                                auxComplement = result.getComplemento2();
 
-                                       if(result.getEnd()!=null){
-                                       auxName = name;
-                                       auxCPF = cpf;
-                                       auxRG = rg;
-                                       auxEmail = email;
-                                       auxPhone = phone;
-                                       auxCep = cep;
-                                       auxStreet = result.getEnd();
-                                       auxDistrict = result.getBairro();
-                                       auxCity = result.getCidade();
-                                       auxState = result.getUf();
-                                       auxNumber = result.getComplemento();
-                                       auxComplement = result.getComplemento2();
-
-                                   } else {%>
-
-                                   <%}
-
-                           }   catch (Exception ex) {
-                               // TODO handle custom exceptions here
-                           }}
-                } else {
-                    %>
-                        <div>Preencha o formulário corretamente, por favor.</div>
-                    <%
-                }
-                            
+                            } else {%>
+                                <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
+                          <%}
 
                         } catch (Exception ex) {
-                        %>
-                        <div>ERRO !!</div>
-                        <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
-                        <%
-                            }
-                        %>
+                            %>
+                            <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
+                            <%
+                        }
+                    }else {
+                            %>
+                    <div>Preencha o formulário corretamente, por favor.</div>
+                            <%
+                        }
+                } 
+
+                } catch (Exception ex) {
+                    %>
+                    <div>ERRO !!</div>
+                    <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
+                    <%
+                }
+                    %>
         <form>
             <label>Nome:</label><br/>
             <input type="text" name="name" value="<%=auxName%>"/><br/><br/>
@@ -177,7 +175,7 @@
             <input type="text" name="number" value="<%=auxNumber%>" /><br/><br/>
             <label>Complemento:</label><br/>
             <input type="text" name="complement" value="<%=auxComplement%>"/><br/><br/>
-            
+
             <input type="submit" name="include" value="Adicionar"/>
         </form><br/>
         <h2>Lista</h2>
@@ -203,7 +201,7 @@
                     Cliente c = BancoClientes.getClientes().get(i);
             %>
             <tr>
-                <td><%=i+1%></td>
+                <td><%=i + 1%></td>
                 <td><%=c.getName()%></td>
                 <td><%=c.getCpf()%></td>
                 <td><%=c.getRg()%></td>
@@ -216,7 +214,7 @@
                 <td><%=c.getStreet()%></td>
                 <td><%=c.getNumber()%></td>
                 <td><%=c.getComplement()%></td>
-                
+
                 <td>
                     <form>
                         <input type="hidden" name="i" value="<%=i%>"/>
