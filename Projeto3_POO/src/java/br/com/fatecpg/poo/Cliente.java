@@ -19,6 +19,8 @@ public class Cliente {
     private String number;
     private String complement;
     private String cep;
+    private String city;
+    private String district;
 
     public String getName() {
         return name;
@@ -92,5 +94,20 @@ public class Cliente {
         this.cep = cep;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
    
 }

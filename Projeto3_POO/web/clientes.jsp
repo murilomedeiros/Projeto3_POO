@@ -27,6 +27,8 @@
                 String msg3 = "";
                 String name = request.getParameter("name"); //PEGANDO OS PARAMÊTROS
                 String cpf = request.getParameter("cpf");
+                String city = request.getParameter("city");
+                String district = request.getParameter("district");
                 String rg = request.getParameter("rg");
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
@@ -34,11 +36,13 @@
                 String number = request.getParameter("number");
                 String complement = request.getParameter("complement");
                 String cep = request.getParameter("cep");
-                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "")) { //CHECKANDO OS PARAMÊTROS
+                if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null &&  district != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" &&  district != "")) { //CHECKANDO OS PARAMÊTROS
                     if (request.getParameter("include") != null) { //CHECKANDO A AÇÃO INCLUDE
                         for (int x = 0; x < BancoClientes.getClientes().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
                             Cliente c = BancoClientes.getClientes().get(x);
                             String nameTest = c.getName();
+                            String cityTest = c.getCity();
+                            String districtTest = c.getDistrict();
                             String emailTest = c.getEmail();
                             String phoneTest = c.getPhone();
                             String streetTest = c.getStreet();
@@ -52,7 +56,7 @@
                             if (rgTest.equals(rg)) { //RG IGUAL
                                 msg2 = "RG já cadastrado no banco !!";
                             }
-                            if (rgTest.equals(rg) && cpfTest.equals(cpf) && nameTest.equals(name) && emailTest.equals(email) && phoneTest.equals(phone) && streetTest.equals(street) && numberTest.equals(number) && complementTest.equals(complement)) { //CLIENTE IGUAL
+                            if (rgTest.equals(rg) && cpfTest.equals(cpf) && nameTest.equals(name) && emailTest.equals(email) && phoneTest.equals(phone) && streetTest.equals(street) && numberTest.equals(number) && complementTest.equals(complement) && cityTest.equals(city) && districtTest.equals(district)) { //CLIENTE IGUAL
                                 msg3 = "Cliente já cadastrado no banco !!";
                             }
                         }
@@ -67,6 +71,8 @@
                             c.setNumber(number);
                             c.setComplement(complement);
                             c.setCep(cep);
+                            c.setCity(city);
+                            c.setDistrict(district);
                             BancoClientes.getClientes().add(c);
                             %> <label>Cadastro efetuado com sucesso !!</label><%
                         }
@@ -112,14 +118,19 @@
             <input type="text" name="email" required/><br/><br/>
             <label>Telefone:</label><br/>
             <input type="text" name="phone" required/><br/><br/>
+            <label>CEP:</label><br/>
+            <input type="text" name="cep" required/><br/><br/>
+            <label>Cidade:</label><br/>
+            <input type="text" name="city" required/><br/><br/>
+            <label>Bairro:</label><br/>
+            <input type="text" name="district" required/><br/><br/>
             <label>Rua:</label><br/>
             <input type="text" name="street" required/><br/><br/>
             <label>Número:</label><br/>
             <input type="text" name="number" required/><br/><br/>
             <label>Complemento:</label><br/>
             <input type="text" name="complement"/><br/><br/>
-            <label>CEP:</label><br/>
-            <input type="text" name="cep" required/><br/><br/>
+            
             <input type="submit" name="include" value="Adicionar"/>
         </form><br/>
         <h2>Lista</h2>
@@ -131,10 +142,12 @@
                 <th>RG</th>
                 <th>Email</th>
                 <th>Telefone</th>
+                <th>CEP</th>
+                <th>Cidade</th>
+                <th>Bairro</th>
                 <th>Rua</th>
                 <th>Número</th>
                 <th>Complemento</th>
-                <th>CEP</th>
                 <th>Ação</th>
             </tr>
             <%
@@ -148,10 +161,13 @@
                 <td><%=c.getRg()%></td>
                 <td><%=c.getEmail()%></td>
                 <td><%=c.getPhone()%></td>
+                <td><%=c.getCep()%></td>
+                <td><%=c.getCity()%></td>
+                <td><%=c.getDistrict()%></td>
                 <td><%=c.getStreet()%></td>
                 <td><%=c.getNumber()%></td>
                 <td><%=c.getComplement()%></td>
-                <td><%=c.getCep()%></td>
+                
                 <td>
                     <form>
                         <input type="hidden" name="i" value="<%=i%>"/>
