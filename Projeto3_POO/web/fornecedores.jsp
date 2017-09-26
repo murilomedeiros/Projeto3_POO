@@ -3,391 +3,475 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Projeto03 POO - Fornecedores</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Projeto03 POO - Fornecedores</title>
 
-    <!-- Include Css Links -->
-    <%@include file="WEB-INF/jspf/includeCss.jspf" %>
-    <!-- Include Css End -->
+        <!-- Include Css Links -->
+        <%@include file="WEB-INF/jspf/includeCss.jspf" %>
+        <!-- Include Css End -->
 
-  </head>
-  <body>
-    <!-- Include Menu -->
-    <%@include file="WEB-INF/jspf/includeMenu.jspf" %>
-    <!-- Include Menu End -->
+    </head>
+    <body>
+        <!-- Include Menu -->
+        <%@include file="WEB-INF/jspf/includeMenu.jspf" %>
+        <!-- Include Menu End -->
 
 
-    <!-- Page Content -->
-    <div class="container-fluid page">
+        <!-- Page Content -->
+        <div class="container-fluid page">
 
-      <div class="col-md-12 title-box">
-        <h1 class="title">Cadastrar Fornecedores</h1>
-        <div class="divider"></div>
-      </div>
+            <div class="col-md-12 title-box">
+                <h1 class="title">Cadastrar Fornecedores</h1>
+                <div class="divider"></div>
+            </div>
 
-      <%
-         String nome;
-         String razaoSocial;
-         String cnpj;
-         String email;
-         String telefone;
-         String rua;
-         String numero;
-         String bairro;
-         String cidade;
-         String estado;
-         String pais;
-         String cep;
-         String anome = "";
-         String arazaoSocial = "";
-         String acnpj = "";
-         String aemail = "";
-         String atelefone = "";
-         String aendereco = "";
-         String acep = "";
-         String arua = "";
-         String abairro = "";
-         String acidade = "";
-         String aestado = "";
-         String apais = "";
-         String anumero = "";
-         String msg1 = "";
-         String msg2 = "";
-         String msg3 = "";
+            <%      String btnE = "hidden";
+                String btnA = "";
+                String aRua = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
+                String aCep = "";
+                String aCidade = "";
+                String aBairro = "";
+                String aEstado = "";
+                String aNumero = "";
+                String aComplemento = "";
+                String aNome = "";
+                String aRazaoSocial = "";
+                String aCnpj = "";
+                String aEmail = "";
+                String aTelefone = "";
+                int aI = BancoFornecedor.getFornecedor().size();
+                try {
+                    String msg1 = ""; //DECLARANDO AS VARIÁVEIS
+                    String msg2 = "";
+                    String msg3 = "";
+                    String nome = request.getParameter("nome"); //PEGANDO OS PARÂMETROS
+                    String cnpj = request.getParameter("cnpj");
+                    String razaoSocial = request.getParameter("razaoSocial");
+                    String cidade = request.getParameter("cidade");
+                    String estado = request.getParameter("estado");
+                    String bairro = request.getParameter("bairro");
+                    String email = request.getParameter("email");
+                    String telefone = request.getParameter("telefone");
+                    String rua = request.getParameter("rua");
+                    String numero = request.getParameter("numero");
+                    String complemento = request.getParameter("complemento");
+                    String cep = request.getParameter("cep");
+                    if ((nome != null && cnpj != null && razaoSocial != null && email != null && telefone != null && rua != null && numero != null && cep != null && cidade != null && bairro != null && estado != null) || (nome != "" && cnpj != "" && razaoSocial != "" && email != "" && telefone != "" && rua != "" && numero != "" && cep != "" && cidade != "" && bairro != "" && estado != "")) { //CHECKANDO OS PARÂMETROS
+                        if (request.getParameter("add") != null) { //CHECKANDO A AÇÃO INCLUDE
+                            btnE = "hidden";
+                            btnA = "";
+                            for (int x = 0; x < BancoFornecedor.getFornecedor().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
+                                Fornecedor c = BancoFornecedor.getFornecedor().get(x);
+                                String nomeTest = c.getNome();
+                                String cidadeTest = c.getCidade();
+                                String bairroTest = c.getBairro();
+                                String emailTest = c.getEmail();
+                                String estadoTest = c.getEstado();
+                                String telefoneTest = c.getTelefone();
+                                String ruaTest = c.getRua();
+                                String numeroTest = c.getNumero();
+                                String complementoTest = c.getComplemento();
+                                String cnpjTest = c.getCnpj();
+                                String razaoSocialTest = c.getRazaoSocial();
+                                if (cnpjTest.equals(cnpj)) { //CNPJ IGUAL
+                                    msg1 = "CNPJ já cadastrado no banco !!";
+                                }
+                                if (razaoSocial.equals(razaoSocial)) { //RG IGUAL
+                                    msg2 = "RG já cadastrado no banco !!";
+                                }
+                                if (razaoSocialTest.equals(razaoSocial) && cnpjTest.equals(cnpj) && nomeTest.equals(nome) && emailTest.equals(email) && telefoneTest.equals(telefone) && ruaTest.equals(rua) && numeroTest.equals(numero) && complementoTest.equals(complemento) && cidadeTest.equals(cidade) && bairroTest.equals(bairro) && estadoTest.equals(estado)) { //CLIENTE IGUAL
+                                    msg3 = "Fornecedor já cadastrado no banco !!";
+                                }
+                            }
+                            if ((msg1 == "" && msg2 == "" && msg3 == "")) { //TUDO CERTO, ADICIONANDO NO "BANCO"...
+                                Fornecedor c = new Fornecedor();
+                                c.setNome(nome);
+                                c.setCnpj(cnpj);
+                                c.setRazaoSocial(razaoSocial);
+                                c.setEmail(email);
+                                c.setTelefone(telefone);
+                                c.setRua(rua);
+                                c.setNumero(numero);
+                                c.setComplemento(complemento);
+                                c.setCep(cep);
+                                c.setEstado(estado);
+                                c.setCidade(cidade);
+                                c.setBairro(bairro);
+                                BancoFornecedor.getFornecedor().add(c);
+            %>
+            <center>
+                <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Cadastro efetuado com sucesso !!
+                </div>
+            </center>
 
-         try {
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <center>
+                        <div class="scroll">
+                            <a href="#table"><i class="fa fa-arrow-down"></i></a>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <%
+                }
+                if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CNPJ JÁ CADASTRADO"... %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    <%= msg1%>
+                </div>
+            </center>
+
+            <%} else if (msg1 == "" && msg2 != "" && msg3 == "") { //ERRO !!!, RAZAO SOCIAL JÁ CADASTRADO"...%>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    <%= msg2%>
+                </div>
+            </center>
+
+            <%} else if (msg1 != "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG E CPF JÁ CADASTRADO"...%>
+
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Razão Social e CNPJ já existente no banco !!
+                </div>
+            </center>
+
+            <%} else if (msg3 != "") { //ERRO !!!, CLIENTE JÁ CADASTRADO"...%>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    <%= msg3%>
+                </div>
+            </center>
+            <%}
+            } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
+                btnE = "hidden";
+                btnA = "";
+                try {
+                    int i = Integer.parseInt(request.getParameter("i"));
+                    BancoFornecedor.getFornecedor().remove(i);
+            %>
+            <center>
+                <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Cliente removido com sucesso !!
+                </div>
+            </center>
+
+            <%} catch (Exception ex) {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Erro na exclusão do cliente ou cliente já excluído !!
+                </div>
+            </center>
+            <%
+                }
+
+            } else if (request.getParameter("consulta") != null) { //BUSCANDO CEP
+                btnE = "hidden";
+                btnA = "";
+                try {
+                    br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
+                    br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
+                    br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cep);
+
+                    if (result.getEnd() != null) {
+                        aNome = nome;
+                        aCnpj = cnpj;
+                        aRazaoSocial = razaoSocial;
+                        aEmail = email;
+                        aTelefone = telefone;
+                        aCep = cep;
+                        aRua = result.getEnd();
+                        aBairro = result.getBairro();
+                        aCidade = result.getCidade();
+                        aEstado = result.getUf();
+
+                    } else {
+                        aNome = nome;
+                        aCnpj = cnpj;
+                        aRazaoSocial = razaoSocial;
+                        aEmail = email;
+                        aTelefone = telefone;
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    ERRO NA BUSCA DO ENDEREÇO !!
+                </div>
+            </center>
+            <%}
+
+            } catch (Exception ex) {
+                aNome = nome;
+                aCnpj = cnpj;
+                aRazaoSocial = razaoSocial;
+                aEmail = email;
+                aTelefone = telefone;
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    ERRO NA BUSCA DO ENDEREÇO !!
+                </div>
+            </center>
+            <%
+                }
+            } else if (request.getParameter("altera") != null) {
+                btnE = "";
+                btnA = "hidden";
+                int i = Integer.parseInt(request.getParameter("i"));
+                aNome = BancoFornecedor.getFornecedor().get(i).getNome();
+                aCnpj = BancoFornecedor.getFornecedor().get(i).getCnpj();
+                aRazaoSocial = BancoFornecedor.getFornecedor().get(i).getRazaoSocial();
+                aEmail = BancoFornecedor.getFornecedor().get(i).getEmail();
+                aTelefone = BancoFornecedor.getFornecedor().get(i).getTelefone();
+                aCep = BancoFornecedor.getFornecedor().get(i).getCep();
+                aRua = BancoFornecedor.getFornecedor().get(i).getRua();
+                aBairro = BancoFornecedor.getFornecedor().get(i).getBairro();
+                aCidade = BancoFornecedor.getFornecedor().get(i).getCidade();
+                aEstado = BancoFornecedor.getFornecedor().get(i).getEstado();
+                aNumero = BancoFornecedor.getFornecedor().get(i).getNumero();
+                aComplemento = BancoFornecedor.getFornecedor().get(i).getComplemento();
+                aI = i;
+            } else if (request.getParameter("altera1") != null) {
+                btnE = "hidden";
+                btnA = "";
+                try {
+                    int i = Integer.parseInt(request.getParameter("i"));
+                    aNome = request.getParameter("name"); //PEGANDO OS PARÂMETROS
+                    aCnpj = request.getParameter("cpf");
+                    aCidade = request.getParameter("city");
+                    aEstado = request.getParameter("state");
+                    aBairro = request.getParameter("district");
+                    aRazaoSocial = request.getParameter("rg");
+                    aEmail = request.getParameter("email");
+                    aTelefone = request.getParameter("phone");
+                    aRua = request.getParameter("street");
+                    aNumero = request.getParameter("number");
+                    aComplemento = request.getParameter("complement");
+                    aCep = request.getParameter("cep");
+                    Fornecedor c = new Fornecedor();
+                    c.setNome(aNome);
+                    c.setCnpj(aCnpj);
+                    c.setRazaoSocial(aRazaoSocial);
+                    c.setEmail(aEmail);
+                    c.setTelefone(aTelefone);
+                    c.setRua(aRua);
+                    c.setNumero(aNumero);
+                    c.setComplemento(aComplemento);
+                    c.setCep(aCep);
+                    c.setEstado(aEstado);
+                    c.setCidade(aCidade);
+                    c.setBairro(aBairro);
+                    BancoFornecedor.getFornecedor().remove(i);
+                    BancoFornecedor.getFornecedor().add(i, c);
+                    aNome = "";
+                    aCnpj = "";
+                    aCidade = "";
+                    aEstado = "";
+                    aBairro = "";
+                    aRazaoSocial = "";
+                    aEmail = "";
+                    aTelefone = "";
+                    aRua = "";
+                    aNumero = "";
+                    aComplemento = "";
+                    aCep = "";
+            %>
+            <center>
+                <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Cliente alterado com sucesso !!
+                </div>
+            </center>
+
+            <%
+            } catch (Exception ex) {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Erro ao alterar cliente.
+                </div>
+            </center>
+            <%
+                }
+            } else if (nome != "" && cnpj != "" && razaoSocial != "" && email != "" && telefone != "" && rua != "" && numero != "" && cep != "" && cidade != "" && bairro != "" && estado != "") {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Preencha o formulário corretamente, por favor.
+                </div>
+            </center>
+            <%
+                    }
+                }
+
+            } catch (Exception ex) {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    <div>ERRO !!</div>
+                    <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
+                </div>
+            </center>
+            <%
+                }
+            %>
+            <%-- end web service invocation --%>
+
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <center>
+                        <div class="scroll">
+                            <a href="#table-fornecedor"><i class="fa fa-arrow-down"></i></a>
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form id="form">
+
+                        <input class="form-input" type="text" name="nome" value="<%=aNome%>" placeholder="Nome" required/>
+                        <input class="form-input" type="text" name="razaoSocial" value="<%=aRazaoSocial%>" placeholder="Razão Social" required/>
+                        <input class="form-input" type="text" id="cnpj" name="cnpj" value="<%=aCnpj%>" placeholder="CNPJ" required/>
+                        <input class="form-input" type="text" name="email" value="<%=aEmail%>" placeholder="Email" required/>
+                        <input class="form-input" type="text" name="telefone" value="<%=aTelefone%>" placeholder="Telefone" required/>
+                        <input class="form-input" type="text" name="cep"  value="<%=aCep%>" placeholder="CEP" required/>
+
+                        <center><button class="btn btn-search" id="consulta" name="consulta" value="Consulta">Consultar CEP <i class="fa fa-search"></i></button></center>
+
+                        <input class="form-input" type="text" name="estado"  value="<%=aEstado%>" placeholder="Estado" />
+                        <input class="form-input" type="text" name="cidade"  value="<%=aCidade%>" placeholder="Cidade" />
+                        <input class="form-input" type="text" name="bairro"  value="<%=aBairro%>" placeholder="Bairro" />
+                        <input class="form-input"type="text" name="rua"  value="<%=aRua%>" placeholder="Rua" />
+                        <input class="form-input" type="text" name="numero"  value="<%=aNumero%>" placeholder="Número" />
+
+                        <center><button <%=btnA%> class="btn" type="submit" name="add">Adicionar <i class="fa fa-plus"></i></button></center>
+                        <center><button <%=btnE%> class="btn" type="submit" name="altera1">Alterar <i class="fa fa-plus"></i></button></center>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-12 title-box">
+                <h2 class="title">Fornecedores Cadastrados</h2>
+                <div class="divider"></div>
+            </div>
+
+            <center>
+                <div class="col-md-3">
+                    <input id="search-fornecedor" class="form-input"/>
+                </div>
+            </center>
+
+            <div class="col-md-12">
+                <table id="table-fornecedor" class="table table-striped">
+                    <thead>
+                        <tr class="table-top">
+                            <th>Indice</th>
+                            <th>Nome</th>
+                            <th>Razão Social</th>
+                            <th>CNPJ</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Rua</th>
+                            <th>Numero</th>
+                            <th>Bairro</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>CEP</th>
+                            <th>Exclusão</th>
+                            <th>Alteração</th>
+                        </tr>
+                    </thead>
+                    <%for (int i = 0; i < BancoFornecedor.getFornecedor().size(); i++) {
+                  Fornecedor c = BancoFornecedor.getFornecedor().get(i);%>
+                    <tbody>
+                        <tr>
+                            <td><%=i%></td>
+                            <td><%=c.getNome()%></td>
+                            <td><%=c.getRazaoSocial()%></td>
+                            <td><%=c.getCnpj()%></td>
+                            <td><%=c.getEmail()%></td>
+                            <td><%=c.getTelefone()%></td>
+                            <td><%=c.getRua()%></td>
+                            <td><%=c.getNumero()%></td>
+                            <td><%=c.getBairro()%></td>
+                            <td><%=c.getCidade()%></td>
+                            <td><%=c.getEstado()%></td>
+                            <td><%=c.getCep()%></td>
+                            <td>
+                                <form>
+                                    <input type="hidden" name="i" value="<%=i%>"/>
+                                    <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="hidden" name="i" value="<%=i%>"/>
+                                    <button class="btn" type="submit" name="altera">Editar <i class="fa fa-pencil"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <%}%>
+
+                </table>
+            </div>
+
+        </div>
+        <!-- Page Content End -->
+
+
+        <!-- Include Footer -->
+        <%@include file="WEB-INF/jspf/includeFooter.jspf" %>
+        <!-- Include Footer End -->
+
+        <!-- Include Javascript Links -->
+        <%@include file="WEB-INF/jspf/includeJs.jspf" %>
+
+        <!-- Include Javascript Links End -->
+
+        <%-- start web service invocation --%>
+        <%--
+        <%
+        try {
             nome = request.getParameter("nome");
-            razaoSocial = request.getParameter("razaoSocial");
-            cnpj = request.getParameter("cnpj");
-            email = request.getParameter("email");
-            telefone = request.getParameter("telefone");
-            rua = request.getParameter("rua");
-            numero = request.getParameter("numero");
-            bairro = request.getParameter("bairro");
-            cidade = request.getParameter("cidade");
-            estado = request.getParameter("estado");
-            cep = request.getParameter("cep");
-
-            if (nome != null && razaoSocial != null && cnpj != null && email != null && telefone != null && rua != null && bairro != null && cep != null && cidade != null && numero != null && estado != null) {
-               if (request.getParameter("add") != null) { //CHECKANDO A AÇÃO INCLUDE
-                  for (int x = 0; x < BancoFornecedor.getFornecedor().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
-                     Fornecedor c = BancoFornecedor.getFornecedor().get(x);
-                     String nomeTest = c.getNome();
-                     String emailTest = c.getEmail();
-                     String cepTest = c.getCep();
-                     String numberTest = c.getNumero();
-                     String cnpjTest = c.getCnpj();
-                     String razaoSocialTest = c.getRazaoSocial();
-
-                     if (razaoSocialTest.equals(razaoSocial) && cnpjTest.equals(cnpj) && nomeTest.equals(nome) && emailTest.equals(email) && cepTest.equals(cep)) { //CLIENTE IGUAL
-                        msg1 = "Cliente já cadastrado no banco !!";
-                     } else if (cnpjTest.equals(cnpj)) { //CNPJ IGUAL
-                        msg2 = "CNPJ já cadastrado no banco !!";
-                     } else if (razaoSocialTest.equals(razaoSocial)) { //RazaoSocial IGUAL
-                        msg3 = "Razão social já cadastrado no banco !!";
-                     }
-
-                  }
-                  if ((msg1 == "" && msg2 == "" && msg3 == "")) {
-                     Fornecedor c = new Fornecedor();
-                     c.setNome(nome);
-                     c.setRazaoSocial(razaoSocial);
-                     c.setCnpj(cnpj);
-                     c.setEmail(email);
-                     c.setTelefone(telefone);
-                     c.setRua(rua);
-                     c.setNumero(numero);
-                     c.setBairro(bairro);
-                     c.setCidade(cidade);
-                     c.setEstado(estado);
-                     c.setCep(cep);
-                     BancoFornecedor.getFornecedor().add(c);
-      %>
-      <center>
-        <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          Cadastro efetuado com sucesso !!
-        </div>
-      </center>
-      <%
-         }
-         if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CPF JÁ CADASTRADO"... %>
-      <center>
-        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          <%= msg1%>
-        </div>
-      </center>
-
-      <%} else if (msg1 == "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG JÁ CADASTRADO"...%>
-      <center>
-        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          <%= msg2%>
-        </div>
-      </center>
-
-      <%} else if (msg1 != "" && msg2 != "" && msg3 == "") { //ERRO !!!, RG E CPF JÁ CADASTRADO"...%>
-
-      <center>
-        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          RG e CPF já existente no banco !!
-        </div>
-      </center>
-
-      <%} else if (msg3 != "") { //ERRO !!!, CLIENTE JÁ CADASTRADO"...%>
-      <center>
-        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          <%= msg3%>
-        </div>
-      </center>
-      <%   }
-         }
-      } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
-         try {
-            int i = Integer.parseInt(request.getParameter("i"));
-            BancoFornecedor.getFornecedor().remove(i);
-      %>
-      <center>
-        <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          Cliente removido com sucesso !!
-        </div>
-      </center>
-
-      <%} catch (Exception ex) {
-      %>
-      <center>
-        <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
-          Erro na exclusão do cliente ou cliente já excluído !!
-        </div>
-      </center>
-      <%
-         }
-
-      } else if (request.getParameter("altera") != null) {
-         int i = Integer.parseInt(request.getParameter("i"));
-         anome = BancoFornecedor.getFornecedor().get(i).getNome();
-         arazaoSocial = BancoFornecedor.getFornecedor().get(i).getRazaoSocial();
-         acnpj = BancoFornecedor.getFornecedor().get(i).getCnpj();
-         aemail = BancoFornecedor.getFornecedor().get(i).getEmail();
-         atelefone = BancoFornecedor.getFornecedor().get(i).getTelefone();
-         acep = BancoFornecedor.getFornecedor().get(i).getCep();
-         arua = BancoFornecedor.getFornecedor().get(i).getRua();
-         abairro = BancoFornecedor.getFornecedor().get(i).getBairro();
-         acidade = BancoFornecedor.getFornecedor().get(i).getCidade();
-         aestado = BancoFornecedor.getFornecedor().get(i).getEstado();
-         apais = BancoFornecedor.getFornecedor().get(i).getPais();
-         anumero = BancoFornecedor.getFornecedor().get(i).getNumero();
-         BancoFornecedor.getFornecedor().remove(i);
-
-      } else if (request.getParameter("consulta") != null) { //BUSCANDO CEP
-         try {
+                    razaoSocial = request.getParameter("razaoSocial");
+                    cnpj = request.getParameter("cnpj");
+                    email = request.getParameter("email");
+                    telefone = request.getParameter("telefone");
+                    rua = request.getParameter("rua");
+                    numero = request.getParameter("numero");
+                    bairro = request.getParameter("bairro");
+                    cidade = request.getParameter("cidade");
+                    estado = request.getParameter("estado");
+                    cep = request.getParameter("cep");
             br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
             br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
-            cep = request.getParameter("cep");
-            br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cep);
-            out.println(result.getEnd());
-            abairro = result.getBairro();
+             // TODO initialize WS operation arguments here
+            String cepi = request.getParameter("cep");
+            // TODO process result here
+            br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cepi);
             if (result.getEnd() != null) {
-               out.println("Result = " + result.getUf());
-
-               anome = nome;
-               acnpj = cnpj;
-               arazaoSocial = razaoSocial;
-               aemail = email;
-               atelefone = telefone;
-               acep = cep;
-               arua = result.getEnd();
-               abairro = result.getBairro();
-               acidade = result.getCidade();
-               aestado = result.getUf();
-            } else {
-               anome = nome;
-               acnpj = cnpj;
-               arazaoSocial = razaoSocial;
-               aemail = email;
-               atelefone = telefone;
-               acep = cep;
-      %>
-      <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
-      <%}
-
-      } catch (Exception ex) {
-         anome = nome;
-         acnpj = cnpj;
-         arazaoSocial = razaoSocial;
-         aemail = email;
-         atelefone = telefone;
-         acep = cep;
-      %>
-      <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
-      <%
-         }
-      } else if (nome == "" && cnpj == "" && razaoSocial == "" && email == "" && telefone == "" && rua == "" && numero == "" && cep == "" && cidade == "" && bairro == "" && estado == "") {
-      %>
-      <div>Preencha o formulário corretamente, por favor.</div>
-      <%
-         }
-
-      } catch (Exception ex) {
-      %>
-      <div>ERRO !!</div>
-      <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
-      <%
-         }
-      %>
-      <%-- end web service invocation --%>
-
-      <div class="row justify-content-center">
-        <div class="col-md-2">
-          <center>
-            <div class="scroll">
-              <a href="#table-fornecedor"><i class="fa fa-arrow-down"></i></a>
-            </div>
-          </center>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <form id="form">
-
-            <input class="form-input" type="text" name="nome" value="<%=anome%>" placeholder="Nome" required/>
-            <input class="form-input" type="text" name="razaoSocial" value="<%=arazaoSocial%>" placeholder="Razão Social" required/>
-            <input class="form-input" type="text" id="cnpj" name="cnpj" value="<%=acnpj%>" placeholder="CNPJ" required/>
-            <input class="form-input" type="text" name="email" value="<%=aemail%>" placeholder="Email" required/>
-            <input class="form-input" type="text" name="telefone" value="<%=atelefone%>" placeholder="Telefone" required/>
-            <input class="form-input" type="text" name="cep"  value="<%=acep%>" placeholder="CEP" required/>
-
-            <center><button class="btn btn-search" id="consulta" name="consulta" value="Consulta">Consultar CEP <i class="fa fa-search"></i></button></center>
-
-            <input class="form-input" type="text" name="estado"  value="<%=aestado%>" placeholder="Estado" />
-            <input class="form-input" type="text" name="cidade"  value="<%=acidade%>" placeholder="Cidade" />
-            <input class="form-input" type="text" name="bairro"  value="<%=abairro%>" placeholder="Bairro" />
-            <input class="form-input"type="text" name="rua"  value="<%=arua%>" placeholder="Rua" />
-            <input class="form-input" type="text" name="numero"  value="<%=anumero%>" placeholder="Número" />
-
-            <center><button class="btn" type="submit" name="add">Adicionar <i class="fa fa-plus"></i></button></center>
-
-          </form>
-        </div>
-      </div>
-
-      <div class="col-md-12 title-box">
-        <h2 class="title">Fornecedores Cadastrados</h2>
-        <div class="divider"></div>
-      </div>
-
-      <center>
-        <div class="col-md-3">
-          <input id="search-fornecedor" class="form-input"/>
-        </div>
-      </center>
-
-      <div class="col-md-12">
-        <table id="table-fornecedor" class="table table-striped">
-          <thead>
-            <tr class="table-top">
-              <th>Indice</th>
-              <th>Nome</th>
-              <th>Razão Social</th>
-              <th>CNPJ</th>
-              <th>Email</th>
-              <th>Telefone</th>
-              <th>Rua</th>
-              <th>Numero</th>
-              <th>Bairro</th>
-              <th>Cidade</th>
-              <th>Estado</th>
-              <th>CEP</th>
-              <th>Exclusão</th>
-              <th>Alteração</th>
-            </tr>
-          </thead>
-          <%for (int i = 0; i < BancoFornecedor.getFornecedor().size(); i++) {
-                Fornecedor c = BancoFornecedor.getFornecedor().get(i);%>
-          <tbody>
-            <tr>
-              <td><%=i%></td>
-              <td><%=c.getNome()%></td>
-              <td><%=c.getRazaoSocial()%></td>
-              <td><%=c.getCnpj()%></td>
-              <td><%=c.getEmail()%></td>
-              <td><%=c.getTelefone()%></td>
-              <td><%=c.getRua()%></td>
-              <td><%=c.getNumero()%></td>
-              <td><%=c.getBairro()%></td>
-              <td><%=c.getCidade()%></td>
-              <td><%=c.getEstado()%></td>
-              <td><%=c.getCep()%></td>
-              <td>
-                <form>
-                  <input type="hidden" name="i" value="<%=i%>"/>
-                  <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
-                </form>
-              </td>
-              <td>
-                <form>
-                  <input type="hidden" name="i" value="<%=i%>"/>
-                  <button class="btn" type="submit" name="altera">Editar <i class="fa fa-pencil"></i></button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-          <%}%>
-
-        </table>
-      </div>
-
-    </div>
-    <!-- Page Content End -->
-
-
-    <!-- Include Footer -->
-    <%@include file="WEB-INF/jspf/includeFooter.jspf" %>
-    <!-- Include Footer End -->
-
-    <!-- Include Javascript Links -->
-    <%@include file="WEB-INF/jspf/includeJs.jspf" %>
-
-    <!-- Include Javascript Links End -->
-
-    <%-- start web service invocation --%>
-    <%--
-    <%
-    try {
-        nome = request.getParameter("nome");
-                razaoSocial = request.getParameter("razaoSocial");
-                cnpj = request.getParameter("cnpj");
-                email = request.getParameter("email");
-                telefone = request.getParameter("telefone");
-                rua = request.getParameter("rua");
-                numero = request.getParameter("numero");
-                bairro = request.getParameter("bairro");
-                cidade = request.getParameter("cidade");
-                estado = request.getParameter("estado");
-                cep = request.getParameter("cep");
-        br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
-        br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
-         // TODO initialize WS operation arguments here
-        String cepi = request.getParameter("cep");
-        // TODO process result here
-        br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP result = port.consultaCEP(cepi);
-        if (result.getEnd() != null) {
-        out.println("Result = "+result.getBairro());
-                        anome = nome;
-                        acnpj = cnpj;
-                        arazaoSocial = razaoSocial;
-                        aemail = email;
-                        atelefone = telefone;
-                        acep = cep;
-                        arua = result.getEnd();
-                        abairro = result.getBairro();
-                        acidade = result.getCidade();
-                        aestado = result.getUf();
+            out.println("Result = "+result.getBairro());
+                            anome = nome;
+                            acnpj = cnpj;
+                            arazaoSocial = razaoSocial;
+                            aemail = email;
+                            atelefone = telefone;
+                            acep = cep;
+                            arua = result.getEnd();
+                            abairro = result.getBairro();
+                            acidade = result.getCidade();
+                            aestado = result.getUf();
+            }
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
         }
-    } catch (Exception ex) {
-        // TODO handle custom exceptions here
-    }
-    %>--%>
-    <%-- end web service invocation --%>
-  </body>
+        %>--%>
+        <%-- end web service invocation --%>
+    </body>
 </html>

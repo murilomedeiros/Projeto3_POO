@@ -23,6 +23,15 @@ public class Fornecedor {
     private String estado;
     private String pais;
     private String numero;
+    private String complemento;
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
     public String getCep() {
         return cep;
