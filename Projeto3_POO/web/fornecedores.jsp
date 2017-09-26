@@ -413,13 +413,13 @@
               <td><%=c.getEstado()%></td>
               <td><%=c.getCep()%></td>
               <td>
-                <form>
+                <form action="fornecedores.jsp">
                   <input type="hidden" name="i" value="<%=i%>"/>
                   <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
                 </form>
               </td>
               <td>
-                <form>
+                <form action="fornecedores.jsp">
                   <input type="hidden" name="i" value="<%=i%>"/>
                   <button class="btn" type="submit" name="altera">Editar <i class="fa fa-pencil"></i></button>
                 </form>

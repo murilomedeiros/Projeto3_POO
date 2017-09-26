@@ -33,7 +33,9 @@ p{
 .page{
   padding: 60px;
 }
-
+#fCount, #cCount{
+  visibility: hidden;
+}
 
 /* TopMenu */
 .top-menu{

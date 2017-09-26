@@ -393,7 +393,8 @@
               <th>Rua</th>
               <th>Número</th>
               <th>Complemento</th>
-              <th>Ação</th>
+              <th>Exclusão</th>
+              <th>Alteração</th>
             </tr>
           </thead>
           <%
@@ -417,9 +418,14 @@
               <td><%=c.getComplement()%></td>
 
               <td>
-                <form>
+                <form action="clientes.jsp">
                   <input type="hidden" name="i" value="<%=i%>"/>
                   <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
+                </form>
+              </td>
+              <td>
+                <form action="clientes.jsp">
+                  <input type="hidden" name="i" value="<%=i%>"/>
                   <button class="btn" type="submit" name="edit">Editar <i class="fa fa-pencil"></i></button>
                 </form>
               </td>
