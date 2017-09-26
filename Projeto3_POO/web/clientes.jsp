@@ -116,7 +116,7 @@
         <div class="col-md-2">
           <center>
             <div class="scroll">
-              <a href="#table"><i class="fa fa-arrow-down"></i></a>
+              <a href="#table-cliente"><i class="fa fa-arrow-down"></i></a>
             </div>
           </center>
         </div>
@@ -356,52 +356,62 @@
         <div class="divider"></div>
       </div>
 
+      <center>
+        <div class="col-md-3">
+          <input id="search-cliente" class="form-input"/>
+        </div>
+      </center>
+
 
       <div class="col-md-12">
-        <table id="table" class="table table-striped">
-          <tr class="table-top">
-            <th>Índice</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>RG</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>CEP</th>
-            <th>Estado</th>
-            <th>Cidade</th>
-            <th>Bairro</th>
-            <th>Rua</th>
-            <th>Número</th>
-            <th>Complemento</th>
-            <th>Ação</th>
-          </tr>
+        <table id="table-cliente" class="table table-striped">
+          <thead>
+            <tr class="table-top">
+              <th>Índice</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>RG</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th>CEP</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Bairro</th>
+              <th>Rua</th>
+              <th>Número</th>
+              <th>Complemento</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
           <%
              for (int i = 0; i < BancoClientes.getClientes().size(); i++) {
                 Cliente c = BancoClientes.getClientes().get(i);
           %>
-          <tr>
-            <td><%=i + 1%></td>
-            <td><%=c.getName()%></td>
-            <td><%=c.getCpf()%></td>
-            <td><%=c.getRg()%></td>
-            <td><%=c.getEmail()%></td>
-            <td><%=c.getPhone()%></td>
-            <td><%=c.getCep()%></td>
-            <td><%=c.getState()%></td>
-            <td><%=c.getCity()%></td>
-            <td><%=c.getDistrict()%></td>
-            <td><%=c.getStreet()%></td>
-            <td><%=c.getNumber()%></td>
-            <td><%=c.getComplement()%></td>
+          <tbody>
+            <tr>
+              <td><%=i + 1%></td>
+              <td><%=c.getName()%></td>
+              <td><%=c.getCpf()%></td>
+              <td><%=c.getRg()%></td>
+              <td><%=c.getEmail()%></td>
+              <td><%=c.getPhone()%></td>
+              <td><%=c.getCep()%></td>
+              <td><%=c.getState()%></td>
+              <td><%=c.getCity()%></td>
+              <td><%=c.getDistrict()%></td>
+              <td><%=c.getStreet()%></td>
+              <td><%=c.getNumber()%></td>
+              <td><%=c.getComplement()%></td>
 
-            <td>
-              <form>
-                <input type="hidden" name="i" value="<%=i%>"/>
-                <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
-                <button class="btn" type="submit" name="edit">Editar <i class="fa fa-pencil"></i></button>
-              </form>
-            </td>
-          </tr>
+              <td>
+                <form>
+                  <input type="hidden" name="i" value="<%=i%>"/>
+                  <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
+                  <button class="btn" type="submit" name="edit">Editar <i class="fa fa-pencil"></i></button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
           <%
              }
           %>

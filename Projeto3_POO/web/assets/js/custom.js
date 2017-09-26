@@ -20,6 +20,7 @@ $(window).scroll(function() {
   }
 });
 
+
 /* Jquery Mask */
 $(document).ready(function() {
   $('.data').mask('00/00/0000');
@@ -28,4 +29,54 @@ $(document).ready(function() {
   $('.cpf').mask('000.000.000-00', {reverse: true});
   $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
   $('.rg').mask('00.000.000-0', {reverse: true});
+});
+
+
+/* Search Table */
+$(document).ready(function() {
+  $('#search-cliente').keyup(function() {
+    searchCliente($(this).val());
+  });
+  function searchCliente(value) {
+    $('#table-cliente tbody tr').each(function() {
+      var found = 'false';
+      $(this).each(function() {
+        if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+        {
+          found = 'true';
+        }
+      });
+      if (found === 'true')
+      {
+        $(this).show();
+      } else
+      {
+        $(this).hide();
+      }
+    });
+  }
+});
+
+$(document).ready(function() {
+  $('#search-fornecedor').keyup(function() {
+    searchFornecedor($(this).val());
+  });
+  function searchFornecedor(value) {
+    $('#table-fornecedor tbody tr').each(function() {
+      var found = 'false';
+      $(this).each(function() {
+        if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+        {
+          found = 'true';
+        }
+      });
+      if (found === 'true')
+      {
+        $(this).show();
+      } else
+      {
+        $(this).hide();
+      }
+    });
+  }
 });
