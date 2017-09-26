@@ -32,7 +32,9 @@
                 <div class="divider"></div>
             </div>
 
-            <%         String auxStreet = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
+            <%                String btnE = "hidden";
+                String btnA = "";
+                String auxStreet = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
                 String auxCep = "";
                 String auxCity = "";
                 String auxDistrict = "";
@@ -44,6 +46,7 @@
                 String auxCPF = "";
                 String auxEmail = "";
                 String auxPhone = "";
+                int auxI = BancoClientes.getClientes().size();
                 try {
                     String msg1 = ""; //DECLARANDO AS VARIÁVEIS
                     String msg2 = "";
@@ -62,6 +65,8 @@
                     String cep = request.getParameter("cep");
                     if ((name != null && cpf != null && rg != null && email != null && phone != null && street != null && number != null && cep != null && city != null && district != null && state != null) || (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" && district != "" && state != "")) { //CHECKANDO OS PARÂMETROS
                         if ((request.getParameter("include") != null) && (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" && district != "" && state != "")) { //CHECKANDO A AÇÃO INCLUDE
+                            btnE = "hidden";
+                            btnA = "";
                             for (int x = 0; x < BancoClientes.getClientes().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
                                 Cliente c = BancoClientes.getClientes().get(x);
                                 String nameTest = c.getName();
@@ -148,6 +153,8 @@
             </center>
             <%}
             } else if (request.getParameter("remove") != null) { //REMOVENDO CLIENTE...
+                btnE = "hidden";
+                btnA = "";
                 try {
                     int i = Integer.parseInt(request.getParameter("i"));
                     BancoClientes.getClientes().remove(i);
@@ -169,6 +176,8 @@
                 }
 
             } else if (request.getParameter("search") != null) { //BUSCANDO CEP
+                btnE = "hidden";
+                btnA = "";
                 try {
                     br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService service = new br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteService();
                     br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente port = service.getAtendeClientePort();
@@ -193,7 +202,11 @@
                         auxEmail = email;
                         auxPhone = phone;
             %>
-            <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    ERRO NA BUSCA DO ENDEREÇO !!
+                </div>
+            </center>
             <%}
 
             } catch (Exception ex) {
@@ -203,20 +216,110 @@
                 auxEmail = email;
                 auxPhone = phone;
             %>
-            <div><label>ERRO NA BUSCA DO ENDEREÇO !!</label></div>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    ERRO NA BUSCA DO ENDEREÇO !!
+                </div>
+            </center>
             <%
                 }
-            } else if (name == "" && cpf == "" && rg == "" && email == "" && phone == "" && street == "" && number == "" && cep == "" && city == "" && district == "" && state == ""){
+            } else if (request.getParameter("edit") != null) {
+                btnE = "";
+                btnA = "hidden";
+                int i = Integer.parseInt(request.getParameter("i"));
+                auxName = BancoClientes.getClientes().get(i).getName();
+                auxCPF = BancoClientes.getClientes().get(i).getCpf();
+                auxRG = BancoClientes.getClientes().get(i).getRg();
+                auxEmail = BancoClientes.getClientes().get(i).getEmail();
+                auxPhone = BancoClientes.getClientes().get(i).getPhone();
+                auxCep = BancoClientes.getClientes().get(i).getCep();
+                auxStreet = BancoClientes.getClientes().get(i).getStreet();
+                auxDistrict = BancoClientes.getClientes().get(i).getDistrict();
+                auxCity = BancoClientes.getClientes().get(i).getCity();
+                auxState = BancoClientes.getClientes().get(i).getState();
+                auxNumber = BancoClientes.getClientes().get(i).getNumber();
+                auxComplement = BancoClientes.getClientes().get(i).getComplement();
+                auxI = i;
+            } else if (request.getParameter("edit1") != null && (name != "" && cpf != "" && rg != "" && email != "" && phone != "" && street != "" && number != "" && cep != "" && city != "" && district != "" && state != "")) {
+                btnE = "hidden";
+                btnA = "";
+                try {
+                    int i = Integer.parseInt(request.getParameter("i"));
+                    auxName = request.getParameter("name"); //PEGANDO OS PARÂMETROS
+                    auxCPF = request.getParameter("cpf");
+                    auxCity = request.getParameter("city");
+                    auxState = request.getParameter("state");
+                    auxDistrict = request.getParameter("district");
+                    auxRG = request.getParameter("rg");
+                    auxEmail = request.getParameter("email");
+                    auxPhone = request.getParameter("phone");
+                    auxStreet = request.getParameter("street");
+                    auxNumber = request.getParameter("number");
+                    auxComplement = request.getParameter("complement");
+                    auxCep = request.getParameter("cep");
+                    Cliente c = new Cliente();
+                    c.setName(auxName);
+                    c.setCpf(auxCPF);
+                    c.setRg(auxRG);
+                    c.setEmail(auxEmail);
+                    c.setPhone(auxPhone);
+                    c.setStreet(auxStreet);
+                    c.setNumber(auxNumber);
+                    c.setComplement(auxComplement);
+                    c.setCep(auxCep);
+                    c.setState(auxState);
+                    c.setCity(auxCity);
+                    c.setDistrict(auxDistrict);
+                    BancoClientes.getClientes().remove(i);
+                    BancoClientes.getClientes().add(i, c);
+                    auxName = "";
+                    auxCPF = "";
+                    auxCity = "";
+                    auxState = "";
+                    auxDistrict = "";
+                    auxRG = "";
+                    auxEmail = "";
+                    auxPhone = "";
+                    auxStreet = "";
+                    auxNumber = "";
+                    auxComplement = "";
+                    auxCep = "";
             %>
-            <div>Preencha o formulário corretamente, por favor.</div>
+            <center>
+                <div class="col-md-4 alert alert-success wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Cliente alterado com sucesso !!
+                </div>
+            </center>
+
+            <%
+            } catch (Exception ex) {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Erro ao alterar cliente.
+                </div>
+            </center>
+            <%
+                }
+            } else if (name == "" && cpf == "" && rg == "" && email == "" && phone == "" && street == "" && number == "" && cep == "" && city == "" && district == "" && state == "") {
+            %>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    Preencha o formulário corretamente, por favor.
+                </div>
+            </center>
             <%
                     }
                 }
 
             } catch (Exception ex) {
             %>
-            <div>ERRO !!</div>
-            <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
+            <center>
+                <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
+                    <div>ERRO !!</div>
+                    <div>Erro ao processar o comando: <%=ex.getMessage()%></div>
+                </div>
+            </center>
             <%
                 }
             %>
@@ -238,9 +341,10 @@
                         <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="top" title="Digite seu Bairro"/>
                         <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="top" title="Digite sua Rua"/>
                         <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="top" title="Digite o Número"/>
-                        <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="top" title="Digite o Complemento"/>
-
-                        <center><input class="btn" type="submit" name="include" value="Adicionar"/></center>
+                        <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="top" title="Digite o Complemento"/> 
+                        <input type="hidden" name="i" value="<%=auxI%>"/>
+                        <center><input <%=btnA%> class="btn" type="submit" name="include" value="Adicionar"/></center>
+                        <center><input <%=btnE%> class="btn" type="submit" name="edit1" value="Editar"/></center>
                     </form>
                 </div>
             </div>
@@ -292,6 +396,7 @@
                             <form>
                                 <input type="hidden" name="i" value="<%=i%>"/>
                                 <input class="btn" type="submit" name="remove" value="Excluir"/>
+                                <input class="btn" type="submit" name="edit" value="Editar"/>
                             </form>
                         </td>
                     </tr>
