@@ -28,7 +28,7 @@
     <div class="container-fluid page">
 
       <div class="col-md-12 title-box">
-        <h1 class="title">Cadastro de Clientes</h1>
+        <h1 class="title">Cadastrar Clientes</h1>
         <div class="divider"></div>
       </div>
 
@@ -326,7 +326,7 @@
 
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form class="">
+          <form>
             <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="top" title="Digite seu Nome"/>
             <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="top" title="Digite seu CPF"/>
             <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="top" title="Digite seu RG"/>
@@ -335,7 +335,7 @@
             <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="top" title="Digite seu CEP"/>
 
             <center>
-              <button class="btn btn-search" type="submit" id="search" name="search">Buscar CEP <i class="fa fa-search"></i></button>
+              <button class="btn btn-search" type="submit" id="search" name="search">Consultar CEP <i class="fa fa-search"></i></button>
             </center>
 
             <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="top" title="Digite seu Estado"/>
