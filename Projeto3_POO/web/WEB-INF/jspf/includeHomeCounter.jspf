@@ -5,14 +5,14 @@
    int fz = BancoFornecedor.getFornecedor().size();
 %>
 
-<div class="top-menu">
+<div class="top-menu wow flipInX">
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-3">
-        <span class="text">Clientes Cadastrados: <i class="icon fa fa-user"></i><span class="badge badge-dark wow bounceIn"> <%= cz%></span></span>
+        <span class="text"><i class="icon fa fa-users"></i> Clientes Cadastrados: <span class="badge badge-dark wow bounceIn"><%=cz%></span></span>
       </div>
       <div class="col-md-3">
-        <span>Fornecedores Cadastrados: <i class="fa fa-user"></i><span class="badge badge-dark wow bounceIn"> <%= fz%></span></span>
+        <span><i class="fa fa-users"></i> Fornecedores Cadastrados: <span class="badge badge-dark wow bounceIn"> <%= fz%></span></span>
       </div>
     </div>
   </div>

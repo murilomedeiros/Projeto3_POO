@@ -15,7 +15,7 @@
   <body data-spy="scroll" data-target="#menu">
 
     <!-- Include Top Menu -->
-    <%@include file="WEB-INF/jspf/includeClienteCounter.jspf" %>
+    <%@include file="WEB-INF/jspf/includeHomeCounter.jspf" %>
     <!-- Include Top Menu End -->
 
     <!-- Include Menu -->
@@ -87,9 +87,7 @@
 
     </div>
     <!-- Page Content End -->
-    <div class="sub-line">
-      <div class="line-footer"></div>
-    </div>
+
     <!-- Include Footer -->
     <%@include file="WEB-INF/jspf/includeFooter.jspf" %>
     <!-- Include Footer End -->

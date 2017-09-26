@@ -70,6 +70,15 @@ $(document).ready(function() {
   }
 });
 
+var app = angular.module('countCliente', []);
+app.controller('counterCliente', function($scope) {
+  $scope.cliente = document.getElementById("cCount").innerHTML;
+});
+
+var app = angular.module('countFornecedor', []);
+app.controller('counterFornecedor', function($scope) {
+  $scope.fornecedor = document.getElementById("fCount").innerHTML;
+});
 
 /* Jquery Mask */
 $(document).ready(function() {

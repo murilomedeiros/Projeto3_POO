@@ -13,11 +13,24 @@
     <!-- Include Css End -->
 
   </head>
-  <body>
+  <body ng-app="countCliente" ng-controller="counterCliente">
 
-    <!-- Include Top Menu -->
-    <%@include file="WEB-INF/jspf/includeClienteCounter.jspf" %>
-    <!-- Include Top Menu End -->
+    <%int fz = BancoFornecedor.getFornecedor().size();%>
+
+    <!-- Top Menu -->
+    <div class="top-menu wow flipInX">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-3">
+            <span class="text"><i class="icon fa fa-users"></i> Clientes Cadastrados: <span class="badge badge-dark wow bounceIn"> {{cliente}}</span></span>
+          </div>
+          <div class="col-md-3">
+            <span><i class="fa fa-users"></i> Fornecedores Cadastrados: <span class="badge badge-dark wow bounceIn"> <%= fz%></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Top Menu End -->
 
     <!-- Include Menu -->
     <%@include file="WEB-INF/jspf/includeMenu.jspf" %>
@@ -25,7 +38,7 @@
 
 
     <!-- Page Content -->
-    <div id="clientes" class="container-fluid page">
+    <div id="clientes" class="container-fluid page" >
 
       <div class="col-md-12 title-box">
         <h1 class="title">Cadastrar Clientes</h1>
@@ -326,24 +339,24 @@
 
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form>
-            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="top" title="Digite seu Nome"/>
-            <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="top" title="Digite seu CPF"/>
-            <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="top" title="Digite seu RG"/>
-            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="top" title="Digite seu Email"/>
-            <input class="form-input telefone" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="top" title="Digite seu Telefone"/>
-            <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="top" title="Digite seu CEP"/>
+          <form action="clientes.jsp">
+            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="left" title="Digite seu Nome"/>
+            <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="left" title="Digite seu CPF"/>
+            <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="left" title="Digite seu RG"/>
+            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="left" title="Digite seu Email"/>
+            <input class="form-input telefone" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="left" title="Digite seu Telefone"/>
+            <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="left" title="Digite seu CEP"/>
 
             <center>
               <button class="btn btn-search" type="submit" id="search" name="search">Consultar CEP <i class="fa fa-search"></i></button>
             </center>
 
-            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="top" title="Digite seu Estado"/>
-            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" data-toggle="tooltip" data-placement="top" title="Digite sua Cidade"/>
-            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="top" title="Digite seu Bairro"/>
-            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="top" title="Digite sua Rua"/>
-            <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="top" title="Digite o Número"/>
-            <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="top" title="Digite o Complemento"/>
+            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="left" title="Digite seu Estado"/>
+            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" data-toggle="tooltip" data-placement="left" title="Digite sua Cidade"/>
+            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="left" title="Digite seu Bairro"/>
+            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="left" title="Digite sua Rua"/>
+            <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="left" title="Digite o Número"/>
+            <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="left" title="Digite o Complemento"/>
             <input type="hidden" name="i" value="<%=auxI%>"/>
             <center><button <%=btnA%> class="btn" type="submit" name="include">Adicionar <i class="fa fa-plus"></i></button></center>
             <center><button <%=btnE%> class="btn" type="submit" name="edit1">Editar <i class="fa fa-pencil"></i></button></center>
@@ -417,8 +430,13 @@
           %>
         </table>
       </div>
+
     </div>
     <!-- Page Content End -->
+    <%
+       int cz = BancoClientes.getClientes().size();
+    %>
+    <span id="cCount"><%=cz%></span>
 
 
     <!-- Include Footer -->
@@ -432,6 +450,6 @@
     <!-- Include Tooltip -->
     <%@include file="WEB-INF/jspf/includeTooltip.jspf" %>
     <!-- Include Tooltip End -->
-
-  </body>
+  </div>
+</body>
 </html>

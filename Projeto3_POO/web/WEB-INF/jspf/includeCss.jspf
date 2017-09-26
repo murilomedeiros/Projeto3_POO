@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- Style CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 <!-- WoW Js-->
 <script type="text/javascript" src="assets/js/wow.js"></script>
