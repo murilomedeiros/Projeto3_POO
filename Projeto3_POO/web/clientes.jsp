@@ -25,7 +25,7 @@
 
 
     <!-- Page Content -->
-    <div class="container-fluid page">
+    <div id="clientes" class="container-fluid page">
 
       <div class="col-md-12 title-box">
         <h1 class="title">Cadastrar Clientes</h1>

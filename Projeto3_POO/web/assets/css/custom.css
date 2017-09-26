@@ -21,7 +21,7 @@ p{
 }
 .divider{
   display: block;
-  margin: -5px auto;
+  margin: 5px auto;
   content: "";
   width: 100px;
   height: 4px;
@@ -33,6 +33,7 @@ p{
 .page{
   padding: 60px;
 }
+
 
 /* TopMenu */
 .top-menu{
@@ -47,14 +48,10 @@ p{
   color: #d3d3d3;
 }
 
+
 /* Nav */
 nav li{
   padding: 0px 10px;
-}
-nav li a.active{
-  color: #1a1a1a;
-  border-bottom: 3px solid #1a1a1a;
-  transition: all .3s ease-in;
 }
 nav li a{
   color: #1a1a1a;
@@ -81,6 +78,71 @@ nav li a:hover{
 .new-brand{
   max-height: 40px;
   transition: max-height .5s ease-in-out;
+}
+
+/* Home */
+.background{
+  padding-bottom: 100px;
+  background-image: url('../img/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.cards{
+  padding: 30px 20px;
+  margin-bottom:50px;
+  background: #262626;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  color: #fff;
+}
+.cards img{
+  max-height: 180px;
+  padding: 10px 0px;
+}
+.cards h2{
+  font-size: 22px;
+  margin: 5px;
+  text-align: center;
+}
+.cards h3{
+  font-size: 18px;
+  margin: 10px;
+}
+.cards p{
+  font-size: 16px;
+  color: #fff;
+}
+.cards .social{
+  position: relative;
+}
+.cards .social a{
+  display:inline-block;
+  text-align:center;
+  background:rgba(0, 0, 0, 0.2);
+  color:#ffffff;
+  line-height:45px;
+  margin:0 4px 0px;
+  width:45px !important;
+  height:45px !important;
+  border-radius:3px;
+  font-size: 22px;
+  transition: all .3s ease-in-out;
+}
+.cards .social a.facebook:hover{
+  background-color: #3b5998;
+  color: #fff;
+  transition: all .3s ease-in-out;
+}
+.cards .social a.linkedin:hover{
+  background-color: #0077b5;
+  color: #fff;
+  transition: all .3s ease-in-out;
+}
+.cards .social a.github:hover{
+  background-color: #fff;
+  color: #000;
+  transition: all .3s ease-in-out;
 }
 
 
@@ -178,6 +240,19 @@ table, th, td{
   background: #bfbfbf;
 }
 
+.sub-line{
+  background: #1a1a1a;
+}
+.line-footer{
+  padding: 0px;
+  border-top: 1px solid rgba(242, 242, 242, 0.7);
+  border-radius: 99%;
+  margin: 0px;
+  padding-bottom: 2px;
+  background: #1a1a1a;
+}
+
+
 /* Footer */
 #footer{
   width: 100%;
@@ -189,7 +264,7 @@ table, th, td{
   padding: 40px 0;
   width: 100%;
   text-align: center;
-  margin-top: 80px;
+
 }
 #footer p{
   margin: 0px;
