@@ -21,10 +21,10 @@
     <div id="top" class="top-menu">
       <div class="container-fluid">
         <div class="row justify-content-center">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <span class="text"><i class="icon fa fa-users"></i> Clientes Cadastrados: <span class="badge badge-dark wow bounceIn"><%=cz%></span></span>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <span><i class="fa fa-users"></i> Fornecedores Cadastrados: <span class="badge badge-dark wow bounceIn"> {{fornecedor}}</span></span>
           </div>
         </div>
