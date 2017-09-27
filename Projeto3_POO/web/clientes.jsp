@@ -375,66 +375,69 @@
         </div>
       </center>
 
+      <div class="wrap-table">
+        <div class="row">
+          <div class="col-md-12">
+            <table id="table-cliente" class="table table-striped">
+              <thead>
+                <tr class="table-top">
+                  <th>Índice</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>RG</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>CEP</th>
+                  <th>Estado</th>
+                  <th>Cidade</th>
+                  <th>Bairro</th>
+                  <th>Rua</th>
+                  <th>Número</th>
+                  <th>Complemento</th>
+                  <th>Exclusão</th>
+                  <th>Alteração</th>
+                </tr>
+              </thead>
+              <%
+                 for (int i = 0; i < BancoClientes.getClientes().size(); i++) {
+                    Cliente c = BancoClientes.getClientes().get(i);
+              %>
+              <tbody>
+                <tr>
+                  <td><%=i + 1%></td>
+                  <td><%=c.getName()%></td>
+                  <td><%=c.getCpf()%></td>
+                  <td><%=c.getRg()%></td>
+                  <td><%=c.getEmail()%></td>
+                  <td><%=c.getPhone()%></td>
+                  <td><%=c.getCep()%></td>
+                  <td><%=c.getState()%></td>
+                  <td><%=c.getCity()%></td>
+                  <td><%=c.getDistrict()%></td>
+                  <td><%=c.getStreet()%></td>
+                  <td><%=c.getNumber()%></td>
+                  <td><%=c.getComplement()%></td>
 
-      <div class="col-md-12">
-        <table id="table-cliente" class="table table-striped">
-          <thead>
-            <tr class="table-top">
-              <th>Índice</th>
-              <th>Nome</th>
-              <th>CPF</th>
-              <th>RG</th>
-              <th>Email</th>
-              <th>Telefone</th>
-              <th>CEP</th>
-              <th>Estado</th>
-              <th>Cidade</th>
-              <th>Bairro</th>
-              <th>Rua</th>
-              <th>Número</th>
-              <th>Complemento</th>
-              <th>Exclusão</th>
-              <th>Alteração</th>
-            </tr>
-          </thead>
-          <%
-             for (int i = 0; i < BancoClientes.getClientes().size(); i++) {
-                Cliente c = BancoClientes.getClientes().get(i);
-          %>
-          <tbody>
-            <tr>
-              <td><%=i + 1%></td>
-              <td><%=c.getName()%></td>
-              <td><%=c.getCpf()%></td>
-              <td><%=c.getRg()%></td>
-              <td><%=c.getEmail()%></td>
-              <td><%=c.getPhone()%></td>
-              <td><%=c.getCep()%></td>
-              <td><%=c.getState()%></td>
-              <td><%=c.getCity()%></td>
-              <td><%=c.getDistrict()%></td>
-              <td><%=c.getStreet()%></td>
-              <td><%=c.getNumber()%></td>
-              <td><%=c.getComplement()%></td>
-
-              <td>
-                <form action="clientes.jsp">
-                  <input type="hidden" name="i" value="<%=i%>"/>
-                  <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
-                </form>
-              </td>
-              <td>
-                <form action="clientes.jsp">
-                  <input type="hidden" name="i" value="<%=i%>"/>
-                  <button class="btn" type="submit" name="edit">Editar <i class="fa fa-pencil"></i></button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-          <%
-             }
-          %>
-        </table>
+                  <td>
+                    <form action="clientes.jsp">
+                      <input type="hidden" name="i" value="<%=i%>"/>
+                      <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="clientes.jsp">
+                      <input type="hidden" name="i" value="<%=i%>"/>
+                      <button class="btn" type="submit" name="edit">Editar <i class="fa fa-pencil"></i></button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+              <%
+                 }
+              %>
+            </table>
+          </div>
+        </div>
       </div>
 
     </div>

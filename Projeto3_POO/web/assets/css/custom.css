@@ -234,6 +234,12 @@ label{
 
 
 /* Table */
+.wrap-table{
+  overflow-x: auto;
+}
+table{
+  width: 100%;
+}
 table, th, td{
   border: 2px solid #404040;
   text-align: center;
@@ -241,7 +247,8 @@ table, th, td{
   font-size: 16px;
 }
 .table-top th{
-  background: #bfbfbf;
+  background: #4d4d4d;
+  color: #f2f2f2
 }
 
 .sub-line{
