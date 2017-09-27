@@ -21,6 +21,25 @@ $(window).scroll(function() {
 });
 
 
+/* Scroll Bottom */
+$(window).scroll(function() {
+  if ($(this).scrollTop() < 400) {
+    $('#scrollbottom').fadeIn();
+  } else {
+    $('#scrollbottom').fadeOut();
+  }
+});
+
+/* Scroll Top */
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 400) {
+    $('#scrolltop').fadeIn();
+  } else {
+    $('#scrolltop').fadeOut();
+  }
+});
+
+
 /* Search Table */
 $(document).ready(function() {
   $('#search-cliente').keyup(function() {

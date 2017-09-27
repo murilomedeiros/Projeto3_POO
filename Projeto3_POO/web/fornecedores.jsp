@@ -18,7 +18,7 @@
     <%int cz = BancoClientes.getClientes().size();%>
 
     <!-- Top Menu -->
-    <div class="top-menu wow flipInX">
+    <div id="top" class="top-menu">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-md-3">
@@ -44,6 +44,10 @@
         <h1 class="title">Cadastrar Fornecedores</h1>
         <div class="divider"></div>
       </div>
+
+      <!-- Scroll Bottom -->
+      <a id="scrollbottom" href="#table-fornecedor" class="scroll"><i class="fa fa-arrow-down"></i></a>
+      <!-- Scroll Bottom End -->
 
       <%
          //BOTOES
@@ -139,16 +143,6 @@
           Cadastro efetuado com sucesso !!
         </div>
       </center>
-
-      <div class="row justify-content-center">
-        <div class="col-md-2">
-          <center>
-            <div class="scroll">
-              <a href="#table-fornecedor"><i class="fa fa-arrow-down"></i></a>
-            </div>
-          </center>
-        </div>
-      </div>
 
       <%
          }
@@ -505,6 +499,10 @@
        int fz = BancoFornecedor.getFornecedor().size();
     %>
     <span id="fCount"><%=fz%></span>
+
+    <!-- Scroll Top -->
+    <a id="scrolltop" href="#top" class="scroll"><i class="fa fa-arrow-up"></i></a>
+    <!-- Scroll Top End -->
 
     <!-- Include Footer -->
     <%@include file="WEB-INF/jspf/includeFooter.jspf" %>
