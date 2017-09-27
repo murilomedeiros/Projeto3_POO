@@ -181,7 +181,7 @@ nav li a:hover{
   transition: all .3s ease-in;
 }
 .btn-search{
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .btn:hover{
   background: transparent;
@@ -203,7 +203,7 @@ label{
 .form-input{
   padding: 10px 10px;
   border: 1px solid #1a1a1a;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   width: 100%;
   background: transparent;
   color: #1a1a1a;
