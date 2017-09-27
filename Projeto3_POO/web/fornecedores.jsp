@@ -45,9 +45,13 @@
                 <div class="divider"></div>
             </div>
 
-            <%      String btnE = "hidden";
+            <%
+                //BOTOES
+                String btnE = "hidden";
                 String btnA = "";
-                String aRua = ""; //DECLARANDO AS VARIÁVEIS AUXILIAR PARA A BUSCA DO CEP
+
+                //DECLARANDO AS VARIÁVEIS AUXILIARES PARA A BUSCA DO CEP
+                String aRua = "";
                 String aCep = "";
                 String aCidade = "";
                 String aBairro = "";
@@ -62,10 +66,13 @@
                 int ii = 0;
                 int aI = BancoFornecedor.getFornecedor().size();
                 try {
-                    String msg1 = ""; //DECLARANDO AS VARIÁVEIS
+                    //VARIAVEIS DE MENSAGEM
+                    String msg1 = "";
                     String msg2 = "";
                     String msg3 = "";
-                    String nome = request.getParameter("nome"); //PEGANDO OS PARÂMETROS
+
+                    //PARAMETROS
+                    String nome = request.getParameter("nome");
                     String cnpj = request.getParameter("cnpj");
                     String razaoSocial = request.getParameter("razaoSocial");
                     String cidade = request.getParameter("cidade");
@@ -78,7 +85,9 @@
                     String complemento = request.getParameter("complemento");
                     String cep = request.getParameter("cep");
                     if ((nome != null && cnpj != null && razaoSocial != null && email != null && telefone != null && rua != null && numero != null && cep != null && cidade != null && bairro != null && estado != null) || (nome != "" && cnpj != "" && razaoSocial != "" && email != "" && telefone != "" && rua != "" && numero != "" && cep != "" && cidade != "" && bairro != "" && estado != "")) { //CHECKANDO OS PARÂMETROS
-                        if (request.getParameter("add") != null) { //CHECKANDO A AÇÃO INCLUDE
+
+                        //ACAO ADICIONAR
+                        if (request.getParameter("add") != null) {
                             btnE = "hidden";
                             btnA = "";
                             for (int x = 0; x < BancoFornecedor.getFornecedor().size(); x++) { //CHECKANDO SE JÁ EXISTE ESSE CLIENTE
@@ -94,17 +103,22 @@
                                 String complementoTest = c.getComplemento();
                                 String cnpjTest = c.getCnpj();
                                 String razaoSocialTest = c.getRazaoSocial();
+
                                 if (cnpjTest.equals(cnpj)) { //CNPJ IGUAL
                                     msg1 = "CNPJ já cadastrado no banco !!";
                                 }
+
                                 if (razaoSocialTest.equals(razaoSocial)) { //RAZAO IGUAL
                                     msg2 = "Razão Social já cadastrada !!";
                                 }
+
                                 if (razaoSocialTest.equals(razaoSocial) && cnpjTest.equals(cnpj) && nomeTest.equals(nome) && emailTest.equals(email) && telefoneTest.equals(telefone) && ruaTest.equals(rua) && numeroTest.equals(numero) && complementoTest.equals(complemento) && cidadeTest.equals(cidade) && bairroTest.equals(bairro) && estadoTest.equals(estado)) { //CLIENTE IGUAL
                                     msg3 = "Fornecedor já cadastrado no banco !!";
                                 }
                             }
-                            if ((msg1 == "" && msg2 == "" && msg3 == "")) { //TUDO CERTO, ADICIONANDO NO "BANCO"...
+
+                            //ADICIONANDO NO BANCO
+                            if ((msg1 == "" && msg2 == "" && msg3 == "")) {
                                 Fornecedor c = new Fornecedor();
                                 c.setNome(nome);
                                 c.setCnpj(cnpj);
@@ -137,8 +151,8 @@
             </div>
 
             <%
-          }
-          if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CNPJ JÁ CADASTRADO"... %>
+                }
+                if (msg1 != "" && msg2 == "" && msg3 == "") { //ERRO !!!, CNPJ JÁ CADASTRADO"... %>
             <center>
                 <div class="col-md-4 alert alert-danger wow bounceIn"  data-wow-delay="0.2s" role="alert">
                     <%= msg1%>
@@ -189,8 +203,8 @@
             </center>
             <%
                 }
-
-            } else if (request.getParameter("consulta") != null) { //BUSCANDO CEP
+                //BUSCANDO CEP
+            } else if (request.getParameter("consulta") != null) {
                 btnE = "hidden";
                 btnA = "";
                 try {
@@ -240,6 +254,8 @@
             </center>
             <%
                 }
+
+                //ALTERACAO DE CADASTRO - BUSCAR DADOS
             } else if (request.getParameter("altera") != null) {
                 btnE = "";
                 btnA = "hidden";
@@ -260,6 +276,8 @@
                 aComplemento = BancoFornecedor.getFornecedor().get(i).getComplemento();
                 aI = i;
                 BancoFornecedor.getFornecedor().remove(i);
+
+                //ALTERACAO DE CADASTRO - ATUALIZAR DADOS
             } else if (request.getParameter("altera1") != null) {
                 btnE = "hidden";
                 btnA = "";
@@ -291,7 +309,7 @@
                     c.setEstado(aEstado);
                     c.setCidade(aCidade);
                     c.setBairro(aBairro);
-                  //  out.println(ii);
+                    //  out.println(ii);
                     //BancoFornecedor.getFornecedor().get(i).setNome(aNome);
                     /*BancoFornecedor.getFornecedor().get(i).setNome(aCnpj);
                   BancoFornecedor.getFornecedor().get(i).setNome(aRazaoSocial);
@@ -358,7 +376,6 @@
             <%
                 }
             %>
-            <%-- end web service invocation --%>
 
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -378,9 +395,10 @@
                         <input class="form-input" type="text" name="bairro"  value="<%=aBairro%>" placeholder="Bairro" />
                         <input class="form-input"type="text" name="rua"  value="<%=aRua%>" placeholder="Rua" />
                         <input class="form-input" type="text" name="numero"  value="<%=aNumero%>" placeholder="Número" />
+                        <input class="form-input" type="text" name="complemento"  value="<%=aComplemento%>" placeholder="Complemento" />
 
                         <center><button <%=btnA%> class="btn" type="submit" name="add">Adicionar <i class="fa fa-plus"></i></button></center>
-                        <center><button <%=btnE%> class="btn" type="submit" name="altera1">Alterar <i class="fa fa-plus"></i></button></center>
+                        <center><button <%=btnE%> class="btn" type="submit" name="altera1">Alterar <i class="fa fa-pencil"></i></button></center>
 
                     </form>
                 </div>
@@ -412,13 +430,14 @@
                             <th>Bairro</th>
                             <th>Cidade</th>
                             <th>Estado</th>
+                            <th>Complemento</th>
                             <th>CEP</th>
                             <th>Exclusão</th>
                             <th>Alteração</th>
                         </tr>
                     </thead>
                     <%for (int i = 0; i < BancoFornecedor.getFornecedor().size(); i++) {
-                  Fornecedor c = BancoFornecedor.getFornecedor().get(i);%>
+                            Fornecedor c = BancoFornecedor.getFornecedor().get(i);%>
                     <tbody>
                         <tr>
                             <td><%=i + 1%></td>
@@ -432,6 +451,7 @@
                             <td><%=c.getBairro()%></td>
                             <td><%=c.getCidade()%></td>
                             <td><%=c.getEstado()%></td>
+                            <td><%=c.getComplemento()%></td>
                             <td><%=c.getCep()%></td>
                             <td>
                                 <form action="fornecedores.jsp">
