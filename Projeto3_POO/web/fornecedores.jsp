@@ -372,16 +372,16 @@
       %>
 
       <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <form id="form" action="fornecedores.jsp">
 
             <input class="form-input dark-tooltip" type="text" name="nome" value="<%=aNome%>" placeholder="Nome" data-toggle="tooltip" data-placement="left" title="Digite seu Nome" maxlength="50" required/>
 
             <div class="row">
-              <div class="col-md-7">
+              <div class="col-md-8">
                 <input class="form-input" type="text" name="razaoSocial" value="<%=aRazaoSocial%>" placeholder="Razão Social" data-toggle="tooltip" data-placement="left" title="Digite a Razão Social" maxlength="40" required/>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <input class="form-input cnpj" type="text" id="cnpj" name="cnpj" value="<%=aCnpj%>" placeholder="CNPJ" data-toggle="tooltip" data-placement="left" title="Digite o CNPJ" required/>
               </div>
             </div>
@@ -405,11 +405,11 @@
             <input class="form-input"type="text" name="rua"  value="<%=aRua%>" placeholder="Rua" data-toggle="tooltip" data-placement="left" title="Digite a Rua" maxlength="50" />
 
             <div class="row">
-              <div class="col-md-6">
-                <input class="form-input" type="text" name="numero"  value="<%=aNumero%>" placeholder="Número" data-toggle="tooltip" data-placement="left" title="Digite o Número" />
+              <div class="col-md-3">
+                <input class="form-input numero" type="text" name="numero"  value="<%=aNumero%>" placeholder="Número" data-toggle="tooltip" data-placement="left" title="Digite o Número" />
               </div>
-              <div class="col-md-6">
-                <input class="form-input" type="text" name="complemento"  value="<%=aComplemento%>" placeholder="Complemento" data-toggle="tooltip" data-placement="right" title="Digite o Complemento" maxlength="25" />
+              <div class="col-md-9">
+                <input class="form-input" type="text" name="complemento"  value="<%=aComplemento%>" placeholder="Complemento" data-toggle="tooltip" data-placement="right" title="Digite o Complemento" maxlength="40" />
               </div>
             </div>
 

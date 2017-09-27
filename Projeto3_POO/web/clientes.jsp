@@ -335,7 +335,7 @@
       %>
 
       <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <form action="clientes.jsp">
             <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="left" title="Digite seu Nome" maxlength="50"/>
 
@@ -369,11 +369,11 @@
             <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="left" title="Digite sua Rua" maxlength="50"/>
 
             <div class="row">
-              <div class="col-md-6">
-                <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="left" title="Digite o Número" maxlength="8"/>
+              <div class="col-md-3">
+                <input class="form-input numero" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="left" title="Digite o Número"/>
               </div>
-              <div class="col-md-6">
-                <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="left" title="Digite o Complemento" maxlength="25"/>
+              <div class="col-md-9">
+                <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="right" title="Digite o Complemento" maxlength="40"/>
               </div>
             </div>
 
