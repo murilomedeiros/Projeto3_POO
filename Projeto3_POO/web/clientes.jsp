@@ -338,25 +338,48 @@
       %>
 
       <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <form action="clientes.jsp">
-            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="left" title="Digite seu Nome"/>
-            <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="left" title="Digite seu CPF"/>
-            <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="left" title="Digite seu RG"/>
-            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="left" title="Digite seu Email"/>
-            <input class="form-input telefone" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="left" title="Digite seu Telefone"/>
-            <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="left" title="Digite seu CEP"/>
+            <input class="form-input" placeholder="Nome" type="text" name="name" value="<%=auxName%>" data-toggle="tooltip" data-placement="left" title="Digite seu Nome" maxlength="50"/>
+
+            <div class="row">
+              <div class="col-md-6">
+                <input class="form-input cpf" placeholder="CPF" type="text" name="cpf"  value="<%=auxCPF%>" data-toggle="tooltip" data-placement="left" title="Digite seu CPF"/>
+              </div>
+              <div class="col-md-6">
+                <input class="form-input rg" placeholder="RG" type="text" name="rg" value="<%=auxRG%>" data-toggle="tooltip" data-placement="right" title="Digite seu RG"/>
+              </div>
+            </div>
+
+            <input class="form-input" placeholder="Email" type="text" name="email" value="<%=auxEmail%>" data-toggle="tooltip" data-placement="left" title="Digite seu Email" maxlength="50"/>
+
+            <div class="row">
+              <div class="col-md-6">
+                <input class="form-input telefone" placeholder="Telefone" type="text" name="phone" value="<%=auxPhone%>" data-toggle="tooltip" data-placement="left" title="Digite seu Telefone"/>
+              </div>
+              <div class="col-md-6">
+                <input class="form-input cep" placeholder="CEP" type="text" name="cep" value="<%=auxCep%>" data-toggle="tooltip" data-placement="right" title="Digite seu CEP"/>
+              </div>
+            </div>
 
             <center>
               <button class="btn btn-search" type="submit" id="search" name="search">Consultar CEP <i class="fa fa-search"></i></button>
             </center>
 
-            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="left" title="Digite seu Estado"/>
-            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" data-toggle="tooltip" data-placement="left" title="Digite sua Cidade"/>
-            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="left" title="Digite seu Bairro"/>
-            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="left" title="Digite sua Rua"/>
-            <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="left" title="Digite o Número"/>
-            <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="left" title="Digite o Complemento"/>
+            <input  class="form-input" placeholder="Estado" type="text" name="state" value="<%=auxState%>" data-toggle="tooltip" data-placement="left" title="Digite seu Estado" maxlength="50"/>
+            <input  class="form-input" placeholder="Cidade" type="text" name="city" value="<%=auxCity%>" data-toggle="tooltip" data-placement="left" title="Digite sua Cidade" maxlength="50"/>
+            <input  class="form-input" placeholder="Bairro" type="text" name="district" value="<%=auxDistrict%>" data-toggle="tooltip" data-placement="left" title="Digite seu Bairro" maxlength="50"/>
+            <input class="form-input" placeholder="Rua" type="text" name="street" value="<%=auxStreet%>" data-toggle="tooltip" data-placement="left" title="Digite sua Rua" maxlength="50"/>
+
+            <div class="row">
+              <div class="col-md-6">
+                <input class="form-input" placeholder="Número" type="text" name="number" value="<%=auxNumber%>" data-toggle="tooltip" data-placement="left" title="Digite o Número" maxlength="8"/>
+              </div>
+              <div class="col-md-6">
+                <input class="form-input" placeholder="Complemento" type="text" name="complement" value="<%=auxComplement%>" data-toggle="tooltip" data-placement="left" title="Digite o Complemento" maxlength="25"/>
+              </div>
+            </div>
+
             <input type="hidden" name="i" value="<%=auxI%>"/>
             <center><button <%=btnA%> class="btn" type="submit" name="include">Adicionar <i class="fa fa-plus"></i></button></center>
             <center><button <%=btnE%> class="btn" type="submit" name="edit1">Editar <i class="fa fa-pencil"></i></button></center>
@@ -370,8 +393,8 @@
       </div>
 
       <center>
-        <div class="col-md-3">
-          <input id="search-cliente" class="form-input"/>
+        <div class="col-md-5">
+          <input id="search-cliente" class="form-input" placeholder="Pesquisar" data-toggle="tooltip" data-placement="left" title="Digite o que deseja procurar"/>
         </div>
       </center>
 
@@ -421,7 +444,7 @@
                   <td>
                     <form action="clientes.jsp">
                       <input type="hidden" name="i" value="<%=i%>"/>
-                      <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-close"></i></button>
+                      <button class="btn" type="submit" name="remove">Excluir <i class="fa fa-trash"></i></button>
                     </form>
                   </td>
                   <td>
